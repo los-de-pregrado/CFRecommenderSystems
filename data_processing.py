@@ -7,12 +7,10 @@ class DataProcessor:
     MUSIC_LISTENING_HABITS_NO_NULLS_CSV = 'raw-data-without-nulls.csv'
     AGGREGATED_MUSIC_LISTENING_HABITS = 'aggregate-data.csv'
 
-    ROWS_TO_SKIP = [2120259, 2446317, 11141080, 11152098,
-                    11152401, 11882086, 12902538, 12935043, 17589538]
 
     def remove_nulls(self):
-        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_TSV, delimiter="\t", encoding="utf-8", header=None, chunksize=100,
-                          skiprows=lambda x: x in self.ROWS_TO_SKIP)
+        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_TSV, delimiter="\t", encoding="utf-8", header=None, chunksize=1000, error_bad_lines=False)
+        
         for df in dfs:
             df.replace('', np.nan, inplace=True)
             df.dropna(inplace=True)
@@ -25,10 +23,13 @@ class DataProcessor:
 
         users = []
         songs = []
+        snames = []
 
-        totaldfs, numdf = 171272, 0
+        totaldfs, numdf = 171272, 0   
+        #con chunksize=10000
+        totaldfs = 1713     
 
-        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8", header=None, chunksize=100, error_bad_lines=False)
+        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8", nrows= 100000,header=None, chunksize=10000, error_bad_lines=False)
 
         for df in dfs:            
             numdf = numdf + 1            
@@ -36,21 +37,30 @@ class DataProcessor:
             for row in df.get(0).get_values():
 
                 elements = row.split(",")
-                user, song = elements[0], elements[4]
+                user, song, sname = elements[0].replace('"',''), elements[4].replace('"',''), elements[5].replace('"','')
 
                 if user not in users and len(user) > 1:
-                    users.append(user)
+                    users.append(user)                    
 
                 if song not in songs and len(user) > 1:
-                    songs.append(song)   
+                    songs.append(song)
+                    snames.append(sname)  
 
             print("Creando conjuntos: ", (numdf/totaldfs)*100, "%")
 
+        songsMatrix = np.array([songs, snames])
+        usersMatrix = np.array([users])
+
+        np.savetxt("songs.txt", songsMatrix.T, fmt='%s',delimiter='\t', newline='\n', encoding="utf-8")
+        np.savetxt("users.txt", usersMatrix, fmt='%s',delimiter='\t', newline='\n', encoding="utf-8")
+        
         print("Conjuntos creados")
 
-        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8", header=None, chunksize=100, error_bad_lines=False)        
+        nsongs, nusers = len(songs),len(users)
 
-        matrix = np.zeros((len(songs),len(users)))
+        matrix = np.zeros((nsongs, nusers))
+
+        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8",nrows= 100000, header=None, chunksize=10000, error_bad_lines=False)        
         
         for df in dfs:              
             numdf = numdf + 1            
@@ -58,7 +68,7 @@ class DataProcessor:
             for row in df.get(0).get_values():
 
                 elements = row.split(",")
-                user, song = elements[0], elements[4]
+                user, song = elements[0].replace('"',''), elements[4].replace('"','')
 
                 idUser, idSong = 0,0
 
@@ -74,9 +84,25 @@ class DataProcessor:
 
         print("Matriz creada")
 
-        np.savetxt("matriz.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
+        np.savetxt("matrix.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
 
-        print("Archivo matriz.txt creado")
+        ncol = 0
+
+        for col in range(matrix.shape[1]):
+
+            ncol = ncol +1
+            
+            maximo = max(matrix[:,col])            
+
+            for row in range(matrix.shape[0]):
+
+                matrix[row,col] = (matrix[row,col]/maximo)*5
+
+            print("Creando matriz normalizada: ", (ncol/nusers)*100, "%")
+
+        print("Matriz normalizada creada")
+
+        np.savetxt("matrix_norm.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
 
 data_processor = DataProcessor()
 data_processor.load_matrix()
