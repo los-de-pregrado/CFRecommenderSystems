@@ -9,7 +9,7 @@ class DataProcessor:
 
 
     def remove_nulls(self):
-        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_TSV, delimiter="\t", encoding="utf-8", header=None, chunksize=1000, error_bad_lines=False)
+        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_TSV, delimiter="\t", encoding="utf-8", header=None, chunksize=10000, error_bad_lines=False)
         
         for df in dfs:
             df.replace('', np.nan, inplace=True)
@@ -22,14 +22,14 @@ class DataProcessor:
     def load_matrix(self):
 
         users = []
-        songs = []
-        snames = []
+        artists = []
+        anames = []
 
         totaldfs, numdf = 171272, 0   
         #con chunksize=10000
         totaldfs = 1713     
 
-        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8", nrows= 100000,header=None, chunksize=10000, error_bad_lines=False)
+        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8",header=None, chunksize=10000, error_bad_lines=False)
 
         for df in dfs:            
             numdf = numdf + 1            
@@ -37,33 +37,38 @@ class DataProcessor:
             for row in df.get(0).get_values():
 
                 elements = row.split(",")
-                user, song, sname = elements[0].replace('"',''), elements[4].replace('"',''), elements[5].replace('"','')
+                user, artist, aname = elements[0].replace('"',''), elements[2].replace('"',''), elements[3].replace('"','')
 
-                if len(user) > 1:
+                if user not in users and len(user) > 1:
                     users.append(user)                    
 
-                if len(user) > 1:
-                    songs.append(song)
-                    snames.append(sname)
+                if artist not in artists and len(user) > 1:
+                    artists.append(artist)
+                    anames.append(aname)
 
             print("Creando conjuntos: ", (numdf/totaldfs)*100, "%")
 
-        songs = list(set(songs))  
-        users = list(set(users))
+        #artists = list(set(artists))  
+        #users = list(set(users))
+        #anames = list(set(anames))
 
         usersMatrix = np.array([users])
-        songsMatrix = np.array([songs])        
+        artistsMatrix = np.array([artists,anames])        
 
-        np.savetxt("songs.txt", songsMatrix.T, fmt='%s',delimiter='\t', newline='\n', encoding="utf-8")
+        print(len(artists), len(anames))
+
+        np.savetxt("artists.txt", artistsMatrix.T, fmt='%s',delimiter='\t', newline='\n', encoding="utf-8")
         np.savetxt("users.txt", usersMatrix, fmt='%s',delimiter='\t', newline='\n', encoding="utf-8")
         
         print("Conjuntos creados")
 
-        nsongs, nusers = len(songs),len(users)
+        nartists, nusers = len(artists),len(users)
 
-        matrix = np.zeros((nsongs, nusers))
+        matrix = np.zeros((nartists, nusers))
 
-        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8",nrows= 100000, header=None, chunksize=10000, error_bad_lines=False)        
+        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8", header=None, chunksize=10000, error_bad_lines=False)   
+
+        numdf = 0     
         
         for df in dfs:              
             numdf = numdf + 1            
@@ -71,14 +76,14 @@ class DataProcessor:
             for row in df.get(0).get_values():
 
                 elements = row.split(",")
-                user, song = elements[0].replace('"',''), elements[4].replace('"','')
+                user, artist = elements[0].replace('"',''), elements[2].replace('"','')
 
-                idUser, idSong = 0,0
+                idUser, idArtist = 0,0
 
                 if len(user) > 1:
                     idUser = users.index(user)
-                    idSong = songs.index(song)
-                    matrix[idSong,idUser] += 1                
+                    idArtist = artists.index(artist)
+                    matrix[idArtist,idUser] += 1                
 
             print("Creando matriz: ", (numdf/totaldfs)*100, "%")
 
@@ -106,5 +111,3 @@ class DataProcessor:
 
 data_processor = DataProcessor()
 data_processor.load_matrix()
-
-
