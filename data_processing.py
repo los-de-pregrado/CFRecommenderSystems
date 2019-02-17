@@ -39,17 +39,20 @@ class DataProcessor:
                 elements = row.split(",")
                 user, song, sname = elements[0].replace('"',''), elements[4].replace('"',''), elements[5].replace('"','')
 
-                if user not in users and len(user) > 1:
+                if len(user) > 1:
                     users.append(user)                    
 
-                if song not in songs and len(user) > 1:
+                if len(user) > 1:
                     songs.append(song)
-                    snames.append(sname)  
+                    snames.append(sname)
 
             print("Creando conjuntos: ", (numdf/totaldfs)*100, "%")
 
-        songsMatrix = np.array([songs, snames])
+        songs = list(set(songs))  
+        users = list(set(users))
+
         usersMatrix = np.array([users])
+        songsMatrix = np.array([songs])        
 
         np.savetxt("songs.txt", songsMatrix.T, fmt='%s',delimiter='\t', newline='\n', encoding="utf-8")
         np.savetxt("users.txt", usersMatrix, fmt='%s',delimiter='\t', newline='\n', encoding="utf-8")
@@ -72,13 +75,10 @@ class DataProcessor:
 
                 idUser, idSong = 0,0
 
-                if user in users and len(user) > 1:
+                if len(user) > 1:
                     idUser = users.index(user)
-
-                if song in songs and len(user) > 1:
                     idSong = songs.index(song)
-
-                matrix[idSong,idUser] = matrix[idSong,idUser] + 1
+                    matrix[idSong,idUser] += 1                
 
             print("Creando matriz: ", (numdf/totaldfs)*100, "%")
 
