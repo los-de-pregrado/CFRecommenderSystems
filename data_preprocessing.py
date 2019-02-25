@@ -1,12 +1,15 @@
+#Punto 2
+
 import numpy as np
 import pandas as pd
+import math
 
 class DataProcessor:
 
     MUSIC_LISTENING_HABITS_TSV = 'userid-timestamp-artid-artname-traid-traname.tsv'
     MUSIC_LISTENING_HABITS_NO_NULLS_CSV = 'raw-data-without-nulls.csv'
     AGGREGATED_MUSIC_LISTENING_HABITS = 'aggregate-data.csv'
-
+    MATRIX_RATINGS = []
 
     def remove_nulls(self):
         dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_TSV, delimiter="\t", encoding="utf-8", header=None, chunksize=10000, error_bad_lines=False)
@@ -16,7 +19,6 @@ class DataProcessor:
             df.dropna(inplace=True)
             df.to_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV,
                       index=False, mode='a')
-
 
 
     def load_matrix(self):
@@ -100,14 +102,17 @@ class DataProcessor:
             maximo = max(matrix[:,col])            
 
             for row in range(matrix.shape[0]):
-
-                matrix[row,col] = (matrix[row,col]/maximo)*5
+                
+                if(matrix[row,col] > 0):
+                    matrix[row,col] = math.log(matrix[row,col],maximo)*4+1
 
             print("Creando matriz normalizada: ", (ncol/nusers)*100, "%")
 
         print("Matriz normalizada creada")
 
         np.savetxt("matrix_norm.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
+
+        self.MATRIX_RATINGS = matrix
 
 data_processor = DataProcessor()
 data_processor.load_matrix()
