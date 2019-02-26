@@ -1,0 +1,50 @@
+
+## Configuracion BD Postgres
+
+Para revisar los parametros de la base de datos, o si se quiere cambiar la configuracion (solo de ser necesario), se debe revisar el archivo config/config.json
+
+
+## Crear base de datos Postgress
+
+### Ubuntu
+
+En consola, ejecutar estos comando:
+
+sudo -u postgres psql
+
+CREATE USER supervoices_user;
+
+CREATE DATABASE supervoices_db OWNER supervoices_user;
+
+ALTER USER supervoices_user WITH PASSWORD 'cloudgrupo4';
+
+\q
+
+### Windows
+
+1. Descargar e instalar la aplicacion PgAdmin (https://www.pgadmin.org/)
+2. Abrir la aplicacion, en la pestaña de servidores, elegir el unico servidor, conectarse a este (por medio del menu del click derecho) y expandir la vista.
+3. Crear un usuario en el servidor (ejm. supervoices_user), agregarle una contraseña (ejm. cloudgrupo4) y darle permisos de superusuario.
+4. Crear la base de datos (ejm. supervoices_db) con el usuario previamente creado como el dueño.
+
+
+## Crear tablas por medio de migracion
+
+1. Realizar el npm install en la carpeta src
+2. Para hacer la migracion de las tablas a la base de datos, ejecutar el siguiente comando: sequelize db:migrate
+3. Opcionalmente, se puede verificar en pgAdmin la creacion de las tablas, entrando a la base de datos > schemas > public > tables.
+
+
+
+
+
+
+
+## Modelos Sequelize 
+
+Los modelos son los siguientes, ya se crearon, se tienen los comandos en caso de hacer cambios:
+
+sequelize model:create --name Administrador --attributes admin_names:string,admin_lastnames:string,admin_email:string,admin_password:string
+sequelize model:create --name Concurso --attributes contest_names:string,contest_banner:string,contest_url:string,contest_begindate:date,contest_enddate:date,contest_prize:decimal,contest_script:text,contest_guidelines:text
+sequelize model:create --name Usuario --attributes user_names:string,user_lastnames:string,user_email:string
+sequelize model:create --name Voz --attributes voice_route:string,voice_status:string

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Supervoices</title>
+    <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+   <!-- Icons -->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+   
+   <link href="./mystyle.css" rel = "stylesheet" type = "text/css">
+
+   <link rel="icon" href="https://cdn.shopify.com/s/files/1/2654/0420/products/TBS-0400-01_genericgrey_1.png?v=1521244444">
+
+  </head>
+  <body>
+
+    <main>
+      <div id="app">
+    
+      </div>      
+    </main>    
+
+    <script src = "bundle.js"></script>     
+
+    <footer class="page-footer red darken-4">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">¡Gracias por visitarnos!</h5>
+            <p class="grey-text text-lighten-4">Esta página garantiza la seguridad de tus archivos multimedia compartidos. Siéntete tranquilo.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Creadores</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="mailto:cm.amaya10@uniandes.edu.co">Cristian Amaya</a></li>
+              <li><a class="grey-text text-lighten-3" href="mailto:nm.hernandez10@uniandes.edu.co">Nicolás Hernández</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2019 Copyright Text
+        <a class="grey-text text-lighten-4 right" href="#app">Inicio</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
+
+    <script>
+      document.addEventListener('component', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(elems, {fullWidth:true, indicators:true, dist:0}, new Date());
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(elems, {fullWidth:true, indicators:true, dist:0});
+      });
+    </script>
+
+    <script>
+      document.addEventListener('component', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, {});
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, {});
+      });
+    </script>
+
+    <script>
+      document.addEventListener('component', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, {});
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, {});
+      });
+    </script>
+
+    <script>
+      document.addEventListener('component', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, {});
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, {});
+      });
+    </script>
+
+    <script>
+      document.addEventListener('component', function() {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {});
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {});
+      });
+    </script>
+
+
+
+  </body>
+</html>

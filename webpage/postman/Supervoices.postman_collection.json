@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "589d8447-e4a4-4b0e-99a5-0cf1bea44d73",
+		"name": "Supervoices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Admin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"admin_names\":\"Mateo\",\n\t\"admin_lastnames\":\"Amaya\",\n\t\"admin_email\":\"mateoap95@gmail.com\",\n\t\"admin_password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Admin By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"admin_names\":\"Mateo\",\n\t\"admin_lastnames\":\"Amaya\",\n\t\"admin_email\":\"mateoap95@gmail.com\",\n\t\"admin_password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.8:8082/api/admin/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"8"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"admin_names\":\"Mateo\",\n\t\"admin_lastnames\":\"Amaya\",\n\t\"admin_email\":\"mateoap95@gmail.com\",\n\t\"admin_password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Admin",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"admin_names\":\"Cristian Mateo\",\n\t\"admin_lastnames\":\"Amaya\",\n\t\"admin_email\":\"mateoap95@gmail.com\",\n\t\"admin_password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://157.253.122.176:8082/api/admin/1",
+					"protocol": "http",
+					"host": [
+						"157",
+						"253",
+						"122",
+						"176"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Concurso",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contest_names\": \"Concurso Rappi\",\n    \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n    \"contest_url\": \"api/concurso/abcFasasd\",\n    \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n    \"contest_enddate\":\"2019-02-27T19:37:00.050Z\",\n    \"contest_prize\": 100000,\n    \"contest_script\": \"Rappi\",\n    \"contest_guidelines\": \"NA\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/concurso",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"concurso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Concurso",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contest_names\": \"Concurso Rappi\",\n    \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n    \"contest_url\": \"api/concurso/abcFasasd\",\n    \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n    \"contest_enddate\":\"2019-02-27T19:37:00.050Z\",\n    \"contest_prize\": 100000,\n    \"contest_script\": \"Rappi\",\n    \"contest_guidelines\": \"NA\",\n    \"AdminId\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/concurso",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"concurso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Concurso",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/concurso/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"concurso",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Concurso by Admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contest_name\": \"Concurso Rappi\",\n    \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n    \"contest_url\": \"abcFas\",\n    \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n    \"contest_enddate\":\"2019-02-27T19:37:00.050Z\",\n    \"contest_prize\": 100000,\n    \"contest_script\": \"Rappi\",\n    \"contest_guidelines\": \"NA\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/admin/1/concursos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin",
+						"1",
+						"concursos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Concursos by Admin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contest_names\": \"Concurso Rappi 2\",\n    \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n    \"contest_url\": \"api/concurso/abcFasasdsad\",\n    \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n    \"contest_enddate\":\"2019-02-27T19:37:00.050Z\",\n    \"contest_prize\": 100000,\n    \"contest_script\": \"Rappi 2\",\n    \"contest_guidelines\": \"NA\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/admin/1/concursos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin",
+						"1",
+						"concursos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Concurso by Admin",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contest_names\": \"Concurso Rappi\",\n    \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n    \"contest_url\": \"abcFas\",\n    \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n    \"contest_enddate\":\"2019-02-27T19:37:00.050Z\",\n    \"contest_prize\": 100000,\n    \"contest_script\": \"Rappi\",\n    \"contest_guidelines\": \"NA\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/admin/1/concursos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin",
+						"1",
+						"concursos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Contest by Admin",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/admin/1/concursos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"admin",
+						"1",
+						"concursos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Participants by Concurso",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/concurso/1/participaciones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"concurso",
+						"1",
+						"participaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Participacion by Concurso",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"participation_names\":\"Cristian\",\n\t\"participation_lastnames\":\"Amaya\",\n\t\"participation_email\":\"mateoap95@gmail.com\",\n\t\"participation_comments\":\"NO comment \",\n\t\"participation_date\": \"2019-02-13\",\n    \"participation_originalroute\": \"D:\\\\Jake\\\\Jake Norvell Vol 1.mp4\",\n    \"participation_route\": \"\",\n    \"participation_status\": \"En proceso\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/concurso/1/participaciones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"concurso",
+						"1",
+						"participaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Participacion",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/participacion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"participacion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Concurso By Url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contest_names\": \"Concurso Rappi\",\n    \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n    \"contest_url\": \"api/concurso/abcFasasd\",\n    \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n    \"contest_enddate\":\"2019-02-27T19:37:00.050Z\",\n    \"contest_prize\": 100000,\n    \"contest_script\": \"Rappi\",\n    \"contest_guidelines\": \"NA\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/concursos/abcFas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"concursos",
+						"abcFas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET Concurso By Url",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"contest_names\": \"Concurso Rappi\",\n    \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n    \"contest_url\": \"api/concurso/abcFasasd\",\n    \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n    \"contest_enddate\":\"2019-02-27T19:37:00.050Z\",\n    \"contest_prize\": 100000,\n    \"contest_script\": \"Rappi\",\n    \"contest_guidelines\": \"NA\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/concursos/abcFas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"concursos",
+								"abcFas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "851"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"353-Pft9cwOtjFuBFmTIoM4Burj+WbU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 Feb 2019 04:06:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"contest_name\": \"Concurso Rappi\",\n        \"contest_banner\": \"https://images.rappi.com/web/seo_rappi.jpg\",\n        \"contest_url\": \"abcFas\",\n        \"contest_begindate\": \"2019-02-09T19:37:00.050Z\",\n        \"contest_enddate\": \"2019-02-27T19:37:00.050Z\",\n        \"contest_prize\": \"100000\",\n        \"contest_script\": \"Rappi\",\n        \"contest_guidelines\": \"NA\",\n        \"contest_winner\": null,\n        \"createdAt\": \"2019-02-18T03:54:55.200Z\",\n        \"updatedAt\": \"2019-02-18T04:03:42.869Z\",\n        \"AdminId\": 1,\n        \"Participations\": [\n            {\n                \"id\": 1,\n                \"participation_names\": \"Cristian\",\n                \"participation_lastnames\": \"Amaya\",\n                \"participation_email\": \"mateoap95@gmail.com\",\n                \"participation_comments\": \"NO comment \",\n                \"participation_date\": \"2019-02-13T00:00:00.000Z\",\n                \"participation_originalroute\": \"D:\\\\Jake\\\\Jake Norvell Vol 1.mp4\",\n                \"participation_route\": \"\",\n                \"participation_status\": \"En proceso\",\n                \"createdAt\": \"2019-02-18T04:00:41.289Z\",\n                \"updatedAt\": \"2019-02-18T04:00:41.289Z\",\n                \"ContestId\": 1\n            }\n        ]\n    }\n]"
+				}
+			]
+		}
+	]
+}
