@@ -3,6 +3,8 @@
 import numpy as np
 import pandas as pd
 import math
+from surprise import Dataset
+from surprise import Reader
 
 class DataProcessor:
 
@@ -31,7 +33,7 @@ class DataProcessor:
         #con chunksize=10000
         totaldfs = 1713     
 
-        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8",header=None, chunksize=10000, error_bad_lines=False)
+        dfs = pd.read_csv(self.MUSIC_LISTENING_HABITS_NO_NULLS_CSV, delimiter="\t", encoding="utf-8",header=None, chunksize=10000,error_bad_lines=False)
 
         for df in dfs:            
             numdf = numdf + 1            
@@ -118,6 +120,25 @@ class DataProcessor:
         np.savetxt("matrix_norm.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
 
         self.MATRIX_RATINGS = matrix
+
+        lista = []
+
+        ncol = 0
+
+        for col in range(matrix.shape[1]):
+
+            ncol = ncol + 1          
+
+            for row in range(matrix.shape[0]):
+            
+                if(matrix[row,col]>0):
+                    lista.append({"userId": users[col], "artistId": artists[row], "rating": matrix[row,col]})
+
+            print("Creando lista: ", (ncol/nusers)*100, "%")
+
+        listadf = pd.DataFrame(lista, columns=["userId", "artistId", "rating"])
+
+        listadf.to_csv('list.csv', index=False)
 
 data_processor = DataProcessor()
 data_processor.load_matrix()
