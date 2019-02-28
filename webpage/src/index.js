@@ -6,7 +6,6 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 var indexRouter = require('./routes/index');
-const batchProcess = require('./public/ffmpeg/batch');
 const app = express();
 const Busboy = require('busboy');
 const fs = require('fs');
@@ -14,7 +13,7 @@ const fs = require('fs');
 // Settings
 
 app.set('port', process.env.PORT || 8082);
-app.set('host', process.env.HOST || '0.0.0.0');
+app.set('host', process.env.HOST || 'localhost');
 
 // Middlewares
 app.use(morgan('tiny'));
@@ -22,8 +21,6 @@ app.use(express.json());
 
 // Routes
 app.use('/', indexRouter);
-batchProcess.consultDBLeftovers();
-batchProcess.executor();
 
 //Receive uploaded voices
 app.post('/upload', function(req, res) {
