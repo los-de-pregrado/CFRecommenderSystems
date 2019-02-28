@@ -23,7 +23,6 @@ module.exports = {
         return User.create({
             user_names: req.body.user_names,
             user_lastnames: req.body.user_lastnames,
-            user_image: req.body.user_image,
             user_email: req.body.user_email,
             user_password: req.body.user_password,
         }).then((user) => res.status(201).send(user))
@@ -40,7 +39,6 @@ module.exports = {
             return user.update({
                 user_names: req.body.user_names || user.user_names,
                 user_lastnames: req.body.user_lastnames || user.user_lastnames,
-                user_image: req.body.user_image || user.user_image,
                 user_email: req.body.user_email || user.user_email,
                 user_password: req.body.user_password || user.user_password,
             })
