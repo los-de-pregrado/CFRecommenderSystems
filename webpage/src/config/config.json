@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "taller1sisrec_user",
+    "password": "sisrecteam8",
+    "database": "taller1sisrec_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "taller1sisrec_user",
+    "password": "sisrecteam8",
+    "database": "taller1sisrec_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "taller1sisrec_user",
+    "password": "sisrecteam8",
+    "database": "taller1sisrec_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
