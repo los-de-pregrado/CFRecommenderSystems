@@ -1,0 +1,3 @@
+LIBRARY jaccard_sim.cp36-win32.pyd
+EXPORTS
+PyInit_jaccard_sim

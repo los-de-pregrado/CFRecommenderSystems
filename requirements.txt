@@ -2,4 +2,4 @@ surprise
 numpy
 pandas
 matplotlib
-math
+cython
