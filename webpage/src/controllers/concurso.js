@@ -1,6 +1,5 @@
 const Contest = require('../models').Contest;
 const Participation = require("../models").Participation;
-const batchProcess = require('../public/ffmpeg/batch');
 
 module.exports = {
   list(req, res) {
@@ -153,8 +152,7 @@ module.exports = {
           ContestId: req.params.id,
         })
           .then((participant) => {
-            batchProcess.newJob(participant.id, participant.participation_originalroute, participant.participation_email, participant.participation_names);
-            res.status(200).send(participant);
+              res.status(200).send(participant);
           })
           .catch((error) => {
             console.log(error);
