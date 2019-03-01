@@ -22,10 +22,7 @@ module.exports = {
     post(req,res){
         return Artist.create({
             artist_name: req.body.artist_name,
-            artist_genre: req.body.artist_genre,
             artist_musicbrainz: req.body.artist_musicbrainz,
-            artist_count: req.body.artist_count || 0,
-            artist_description: req.body.artist_description,
         }).then((artist) => res.status(201).send(artist))
         .catch((error) => res.status(400).send(error));
     },
@@ -39,10 +36,7 @@ module.exports = {
             }
             return artist.update({
                 artist_name: req.body.artist_name || artist.artist_name,
-                artist_genre: req.body.artist_genre || artist.artist_genre,
                 artist_musicbrainz: req.body.artist_musicbrainz || artist.artist_musicbrainz,
-                artist_count: req.body.artist_count || artist.artist_count,
-                artist_description: req.body.artist_description || artist.artist_description,
             })
             .then((artist) => res.status(200).send(artist))
             .catch((error) => res.status(400).send(error));

@@ -93,7 +93,7 @@ class DataProcessor:
 
         print("Matriz creada")
 
-        np.savetxt("matrix.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
+        #np.savetxt("matrix.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
 
         ncol = 0
 
@@ -117,9 +117,7 @@ class DataProcessor:
 
         print("Matriz normalizada creada")
 
-        np.savetxt("matrix_norm.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
-
-        self.MATRIX_RATINGS = matrix
+        #np.savetxt("matrix_norm.txt", matrix, delimiter='\t', newline='\n', encoding="utf-8")
 
         lista = []
 
@@ -129,10 +127,16 @@ class DataProcessor:
 
             ncol = ncol + 1          
 
-            for row in range(matrix.shape[0]):
+            nitem = 0
+            while(nitem < len(matrix.shape[0])):
+
+
+                nItem += 2
+
+            #for row in range(matrix.shape[0]):
             
-                if(matrix[row,col]>0):
-                    lista.append({"userId": users[col], "artistId": artists[row], "rating": matrix[row,col]})
+                if(matrix[nitem,col]>0):
+                    lista.append({"userId": users[col], "artistId": artists[nitem], "rating": matrix[nitem,col]})
 
             print("Creando lista: ", (ncol/nusers)*100, "%")
 
