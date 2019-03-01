@@ -9,12 +9,6 @@ def jaccard(n_x, yr, min_support):
     Compute the jaccard similarity index between
     all pairs of users (or items).
     """
-    # print("This is yr: {}".format(yr))
-    # print("This is n_x: {}".format(n_x))
-    # print("This is min_support: {}".format(min_support))
-
-    xi = 0
-    xj = 0
 
     intersect = np.zeros((n_x, n_x), np.double)
     total = np.zeros(n_x, np.double)
@@ -32,8 +26,8 @@ def jaccard(n_x, yr, min_support):
             if intersect[xi, xj] < min_support:
                 sim[xi, xj] = 0
             else:
-                denum = total[xi] + total[xj] - intersect[xi, xj]
-                sim[xi, xj] = intersect[xi, xj] / denum
+                union = total[xi] + total[xj] - intersect[xi, xj]
+                sim[xi, xj] = intersect[xi, xj] / union
 
             sim[xj, xi] = sim[xi, xj]
             

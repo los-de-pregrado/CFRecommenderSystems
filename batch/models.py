@@ -5,8 +5,7 @@ from surprise import AlgoBase, PredictionImpossible
 from surprise import similarities as sims
 
 from jaccard_sim import jaccard
-
-# from surprise.prediction_algorithms import PredictionImpossible
+from mclaughlin_sim import mclaughlin
 
 
 class SymmetricAlgoJaccard(AlgoBase):
@@ -29,7 +28,9 @@ class SymmetricAlgoJaccard(AlgoBase):
         return self
 
     def switch(self, u_stuff, i_stuff):
-        """Return x_stuff and y_stuff depending on the user_based field."""
+        """
+        Return x_stuff and y_stuff depending on the user_based field.
+        """
 
         if self.sim_options['user_based']:
             return u_stuff, i_stuff
@@ -39,10 +40,9 @@ class SymmetricAlgoJaccard(AlgoBase):
     def compute_similarities(self, verbose=False):
 
         construction_func = {'cosine': sims.cosine,
-                             'msd': sims.msd,
                              'pearson': sims.pearson,
-                             'pearson_baseline': sims.pearson_baseline,
-                             'jaccard': jaccard}
+                             'jaccard': jaccard,
+                             'mclaughlin': mclaughlin}
 
         if self.sim_options['user_based']:
             n_x, yr = self.trainset.n_users, self.trainset.ir
@@ -78,12 +78,13 @@ class SymmetricAlgoJaccard(AlgoBase):
 
 class KNNBasic(SymmetricAlgoJaccard):
 
-    def __init__(self, k=40, min_k=1, sim_options={}, verbose=True, **kwargs):
+    def __init__(self, k=40, min_k=1, threshold=0, sim_options={}, verbose=True, **kwargs):
 
         SymmetricAlgoJaccard.__init__(self, sim_options=sim_options, verbose=verbose,
                                       **kwargs)
         self.k = k
         self.min_k = min_k
+        self.threshold = threshold
 
     def fit(self, trainset):
 
@@ -99,7 +100,7 @@ class KNNBasic(SymmetricAlgoJaccard):
 
         x, y = self.switch(u, i)
 
-        neighbors = [(self.sim[x, x2], r) for (x2, r) in self.yr[y]]
+        neighbors = [(self.sim[x, x2], r) for (x2, r) in self.yr[y] if self.sim[x, x2] > self.threshold]
         k_neighbors = heapq.nlargest(self.k, neighbors, key=lambda t: t[0])
 
         # compute weighted average

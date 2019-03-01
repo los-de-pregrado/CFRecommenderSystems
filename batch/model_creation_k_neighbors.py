@@ -11,7 +11,7 @@ df = pd.read_csv("../preprocessing/list.csv", delimiter=",",
                  encoding="utf-8", error_bad_lines=False)
 reader = Reader(rating_scale=(1.0, 5.0))
 data = Dataset.load_from_df(df[['userId', 'artistId', 'rating']], reader)
-train_set, test_set = train_test_split(data, test_size=.25)
+train_set, test_set = train_test_split(data, test_size=.9999)
 
 
 def get_top_n(predictions, n=10):
@@ -31,25 +31,25 @@ def get_top_n(predictions, n=10):
 
 sim_options_jaccard = {
     'name': 'jaccard',
-    'user_based': True
+    'user_based': False,
 }
 
 sim_options_pearson = {
     'name': 'pearson',
-    'user_based': True,
+    'user_based': False,
 }
 
 sim_options_cosine = {
     'name': 'cosine',
-    'user_based': True,
+    'user_based': False,
 }
 
 # kValues = [5, 10, 20, 40, 100, 150, 200, 300, 500]
 # kValues = [5, 10, 20, 40, 60, 80]
 # kValues = [30, 40, 50, 60, 70]
-k_values = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
-# k_values = [40]
-
+k_values = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
+# k_values = [20, 25, 30, 35, 100, 500, 992]
+repetitions = 10
 jaccard_rmse_values = []
 jaccard_min_error = 1
 jaccard_min_error_index = 0
@@ -62,6 +62,7 @@ cosine_rmse_values = []
 cosine_min_error = 1
 cosine_min_error_index = 0
 index = 0
+
 for k_value in k_values:
     jaccard_algorithm = KNNBasic(k=k_value, sim_options=sim_options_jaccard)
     jaccard_algorithm.fit(train_set)
@@ -102,7 +103,8 @@ plt.plot(k_values, pearson_rmse_values, 'g', label='Pearson RMSE')
 plt.plot(k_values[pearson_min_error_index], pearson_rmse_values[pearson_min_error_index], 'go')
 plt.plot(k_values, cosine_rmse_values, 'r', label='Cosine RMSE')
 plt.plot(k_values[cosine_min_error_index], cosine_rmse_values[cosine_min_error_index], 'ro')
-plt.ylabel('Accuracy')
+plt.ylabel('Error')
 plt.xlabel('Number of neighbors (k)')
+plt.xticks(np.arange(min(k_values), max(k_values)+1, 5.0))
 plt.legend(loc='upper right')
 plt.show()
