@@ -13,22 +13,6 @@ reader = Reader(rating_scale=(1.0, 5.0))
 data = Dataset.load_from_df(df[['userId', 'artistId', 'rating']], reader)
 train_set, test_set = train_test_split(data, test_size=.25)
 
-
-def get_top_n(predictions, n=10):
-    # First map the predictions to each user.
-    top_n = {}
-    for uid, iid, true_r, est, _ in predictions:
-        if uid not in top_n:
-            top_n[uid] = [(iid, est)]
-        else:
-            top_n[uid].append((iid, est))
-
-    for uid, user_ratings in top_n.items():
-        user_ratings.sort(key=lambda x: x[1], reverse=True)
-        top_n[uid] = user_ratings[:n]
-
-    return top_n
-
 sim_options_jaccard = {
     'name': 'jaccard',
     'user_based': True
