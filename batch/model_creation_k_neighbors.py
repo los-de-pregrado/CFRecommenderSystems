@@ -7,11 +7,11 @@ from surprise.model_selection import train_test_split
 
 from models import KNNBasic
 
-df = pd.read_csv("../preprocessing/list.csv", delimiter=",",
-                 encoding="utf-8", error_bad_lines=False)
+df = pd.read_csv("../preprocessing/list_half_half.csv", delimiter=";",
+                 encoding="utf-8", error_bad_lines=False, low_memory=False)
 reader = Reader(rating_scale=(1.0, 5.0))
 data = Dataset.load_from_df(df[['userId', 'artistId', 'rating']], reader)
-train_set, test_set = train_test_split(data, test_size=.9999)
+train_set, test_set = train_test_split(data, test_size=.25)
 
 
 def get_top_n(predictions, n=10):
