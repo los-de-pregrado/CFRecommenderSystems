@@ -7,7 +7,7 @@ from surprise.model_selection import train_test_split
 
 from models import KNNBasic
 
-df = pd.read_csv("../preprocessing/list.csv", delimiter=",",
+df = pd.read_csv("../preprocessing/list_1000a.csv", delimiter=";",
                  encoding="utf-8", error_bad_lines=False)
 reader = Reader(rating_scale=(1.0, 5.0))
 data = Dataset.load_from_df(df[['userId', 'artistId', 'rating']], reader)
@@ -15,32 +15,31 @@ train_set, test_set = train_test_split(data, test_size=.25)
 
 sim_options_jaccard = {
     'name': 'jaccard',
-    'user_based': True
+    'user_based': False
 }
 
 sim_options_pearson = {
     'name': 'pearson',
-    'user_based': True,
+    'user_based': False,
 }
 
 sim_options_cosine = {
     'name': 'cosine',
-    'user_based': True,
+    'user_based': False,
 }
 
-thresholds = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+thresholds = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8] # , 0.9, 1]
 k_value = 992
-repetitions = 10
 jaccard_rmse_values = []
-jaccard_min_error = 1
+jaccard_min_error = 5
 jaccard_min_error_index = 0
 
 pearson_rmse_values = []
-pearson_min_error = 1
+pearson_min_error = 5
 pearson_min_error_index = 0
 
 cosine_rmse_values = []
-cosine_min_error = 1
+cosine_min_error = 5
 cosine_min_error_index = 0
 index = 0
 
@@ -87,5 +86,5 @@ plt.plot(thresholds[cosine_min_error_index], cosine_rmse_values[cosine_min_error
 plt.ylabel('Error')
 plt.xlabel('Similarity threshold (t)')
 plt.xticks(np.arange(min(thresholds), max(thresholds)+0.1, 0.1))
-plt.legend(loc='upper right')
+plt.legend(loc='best')
 plt.show()

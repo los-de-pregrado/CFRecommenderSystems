@@ -8,7 +8,7 @@ from jaccard_sim import jaccard
 from mclaughlin_sim import mclaughlin
 
 
-class SymmetricAlgoJaccard(AlgoBase):
+class SymmetricAlgo(AlgoBase):
 
     def __init__(self, sim_options={}, verbose=True, **kwargs):
 
@@ -76,11 +76,11 @@ class SymmetricAlgoJaccard(AlgoBase):
                             'are ' + ', '.join(construction_func.keys()) + '.')
 
 
-class KNNBasic(SymmetricAlgoJaccard):
+class KNNBasic(SymmetricAlgo):
 
     def __init__(self, k=40, min_k=1, threshold=0, sim_options={}, verbose=True, **kwargs):
 
-        SymmetricAlgoJaccard.__init__(self, sim_options=sim_options, verbose=verbose,
+        SymmetricAlgo.__init__(self, sim_options=sim_options, verbose=verbose,
                                       **kwargs)
         self.k = k
         self.min_k = min_k
@@ -88,7 +88,7 @@ class KNNBasic(SymmetricAlgoJaccard):
 
     def fit(self, trainset):
 
-        SymmetricAlgoJaccard.fit(self, trainset)
+        SymmetricAlgo.fit(self, trainset)
         self.sim = self.compute_similarities(verbose=self.verbose)
 
         return self

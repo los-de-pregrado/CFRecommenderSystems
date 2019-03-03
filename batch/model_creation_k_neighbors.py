@@ -7,7 +7,7 @@ from surprise.model_selection import train_test_split
 
 from models import KNNBasic
 
-df = pd.read_csv("../preprocessing/list_half_half.csv", delimiter=";",
+df = pd.read_csv("../preprocessing/list_1000a.csv", delimiter=";",
                  encoding="utf-8", error_bad_lines=False, low_memory=False)
 reader = Reader(rating_scale=(1.0, 5.0))
 data = Dataset.load_from_df(df[['userId', 'artistId', 'rating']], reader)
@@ -44,22 +44,24 @@ sim_options_cosine = {
     'user_based': False,
 }
 
-# kValues = [5, 10, 20, 40, 100, 150, 200, 300, 500]
+# k_values = [5, 10, 20, 40, 100, 150, 200, 300, 500]
 # kValues = [5, 10, 20, 40, 60, 80]
 # kValues = [30, 40, 50, 60, 70]
-k_values = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
+# k_values = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
 # k_values = [20, 25, 30, 35, 100, 500, 992]
+# k_values = [1, 101, 201, 301, 401, 501, 601, 701, 801, 901, 1001]
+k_values = [5, 10, 15, 20, 25, 30, 35, 40, 45]
 repetitions = 10
 jaccard_rmse_values = []
-jaccard_min_error = 1
+jaccard_min_error = 5
 jaccard_min_error_index = 0
 
 pearson_rmse_values = []
-pearson_min_error = 1
+pearson_min_error = 5
 pearson_min_error_index = 0
 
 cosine_rmse_values = []
-cosine_min_error = 1
+cosine_min_error = 5
 cosine_min_error_index = 0
 index = 0
 
@@ -78,24 +80,33 @@ for k_value in k_values:
 
     # print(get_top_n(predictions, 10))
 
-    jaccard_rmse = accuracy.rmse(jaccard_predictions)
+    jaccard_rmse = accuracy.rmse(jaccard_predictions, verbose=False)
     if jaccard_rmse < jaccard_min_error:
         jaccard_min_error = jaccard_rmse
         jaccard_min_error_index = index
     jaccard_rmse_values.append(jaccard_rmse)
 
-    pearson_rmse = accuracy.rmse(pearson_predictions)
+    pearson_rmse = accuracy.rmse(pearson_predictions, verbose=False)
     if pearson_rmse < pearson_min_error:
         pearson_min_error = pearson_rmse
         pearson_min_error_index = index
     pearson_rmse_values.append(pearson_rmse)
     
-    cosine_rmse = accuracy.rmse(cosine_predictions)
+    cosine_rmse = accuracy.rmse(cosine_predictions, verbose=False)
     if cosine_rmse < cosine_min_error:
         cosine_min_error = cosine_rmse
         cosine_min_error_index = index
     cosine_rmse_values.append(cosine_rmse)
+
+    print("Jaccard error is {}".format(jaccard_rmse))
+    print("Cosine error is {}".format(cosine_rmse))
+    print("Pearson error is {}".format(pearson_rmse))
     index = index + 1
+
+print(" ")
+print("Jaccard min error is {}".format(jaccard_min_error))
+print("Cosine min error is {}".format(cosine_min_error))
+print("Pearson min error is {}".format(pearson_min_error))
 
 plt.plot(k_values, jaccard_rmse_values, 'b', label='Jaccard RMSE')
 plt.plot(k_values[jaccard_min_error_index], jaccard_rmse_values[jaccard_min_error_index], 'bo')
