@@ -1,34 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { Navbar, NavItem } from "react-materialize";
+
 
 
 export default class Header extends Component {
 
   render() {
-    return (
-      <div className="navbar-fixed">          
-        <nav>
-          <div className="nav-wrapper red darken-4">
-            <Link to='/home' className={this.props.currentUser ? "brand-logo right": "brand-logo left"}>Songify Alpes</Link>
-              <ul id="nav-mobile" className={this.props.currentUser ? "left hide-on-med-and-down": "right hide-on-med-and-down"}>
-              {
-                this.props.currentUser ?
-                <div>
-                  <li><Link to='/perfil'>Mi perfil</Link></li>
-                  <li><Link to='/explorar'>Explorar</Link></li>
-                  <li><Link to='/historial'>historial</Link></li>
-                  <li><Link onclick = {this.props.logout}>Salir</Link></li>                      
-                </div>
-                :
-                <div>
-                  <li><Link to='/login'>Iniciar sesión</Link></li>
-                  <li><Link to='/signup'>Registrarse</Link></li>
-                </div>
-              }                    
-              </ul>   
-          </div>
-        </nav>          
-      </div> 
-    );
+    if(this.props.currentUser){
+      return(
+        <Navbar className='cyan darken-1' brand='Songify' left>
+          <NavItem><Link to={'/perfil/' + this.props.currentUser.userid} replace>Mi Perfil</Link></NavItem>
+          <NavItem><Link to={'/historial/' + this.props.currentUser.userid} replace>Mi Historial</Link></NavItem>
+          <NavItem><Link to={'/explorar/' + this.props.currentUser.userid} replace>Explorar</Link></NavItem>
+          <NavItem onClick = {() => {this.props.logout()}}>Salir</NavItem>                      
+        </Navbar>
+      );
+    }
+    else{
+      return(
+        <Navbar className='cyan darken-1' brand='Songify' right> 
+          <NavItem><Link to='login' replace>Iniciar sesión</Link></NavItem>
+          <NavItem><Link to='signup' replace>Registrarse</Link></NavItem>
+        </Navbar>
+      );
+    }
   }
 }

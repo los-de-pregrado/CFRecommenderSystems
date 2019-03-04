@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
+import { Carousel } from "react-materialize";
 
-class Home extends Component{
-
-  constructor(){
-    super();    
-    this.state={
-
-    }
-  }
+export default class Home extends Component{
   
   componentDidMount(){
     document.dispatchEvent(new Event('component'));
@@ -17,12 +11,12 @@ class Home extends Component{
     return(
         <div>        
 
-            <div className="carousel carousel-slider">
-                <a className="carousel-item" href="#one!"><img className = "responsive-img" src="http://www.faithstrongtoday.com/wp-content/uploads/kane-reinholdtsen-145944-1600x600.jpg"/></a>
-                <a className="carousel-item" href="#two!"><img className = "responsive-img" src="https://thunderrise.com/cache/img/2017/12/25/1920x600_15142172685a411f34101258.79712519radio%20.jpg"/></a>
-                <a className="carousel-item" href="#three!"><img className = "responsive-img" src="http://www.valemediagroup.com/wp-content/uploads/2018/10/newslider.png"/></a>
-                <a className="carousel-item" href="#four!"><img className = "responsive-img" src="http://enigmaradio.cl/portal/wp-content/uploads/2018/03/slider2.jpg"/></a>
-            </div>
+          <Carousel options={{ fullWidth: true }}  images={[
+            'http://www.faithstrongtoday.com/wp-content/uploads/kane-reinholdtsen-145944-1600x600.jpg',
+            'http://www.faithstrongtoday.com/wp-content/uploads/kane-reinholdtsen-145944-1600x600.jpg',
+            'http://www.faithstrongtoday.com/wp-content/uploads/kane-reinholdtsen-145944-1600x600.jpg',
+            'http://www.faithstrongtoday.com/wp-content/uploads/kane-reinholdtsen-145944-1600x600.jpg'
+          ]}/>
             
             <br></br>
 
@@ -61,5 +55,3 @@ class Home extends Component{
     )
   }
 }
-
-export default Home;

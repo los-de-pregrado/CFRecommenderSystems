@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { error } from 'util';
 
-class SignUp extends Component{
+export default class SignUp extends Component{
 
   constructor(){
     super();
@@ -117,5 +117,3 @@ class SignUp extends Component{
     )
   }
 }
-
-export default SignUp;

@@ -3,8 +3,10 @@ import dateFormat from 'dateformat';
 
 export default class UserProfile extends Component{
 
-  componentDidMount(){
-    document.dispatchEvent(new Event('component'));       
+  constructor(){
+    super();
+    //const userId = this.props.match.params.usuario;
+
   }
 
   render(){
