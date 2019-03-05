@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import StarRatings from 'react-star-ratings';
 
-className UserSearch extends Component{
+class UserSearch extends Component{
 
   constructor(props){
     super(props);    
