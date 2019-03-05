@@ -67,8 +67,8 @@ class UserSearch extends Component{
                 <img src={gen.artist_image}/>
               </div>
               <div className="card-stacked">
-                <div className="card-content">
-                <center><b><p>{gen.artist_name}</p></b></center>
+                <div className="card-content valign-wrapper">
+                  <center><b><p><font size="5">{gen.artist_name}</font></p></b></center>
                 </div>
                 <div className="card-action">
                   <center>
@@ -96,8 +96,8 @@ class UserSearch extends Component{
               <img src={mine.artist_image}/>
             </div>
             <div className="card-stacked">
-              <div className="card-content">
-              <center><b><p>{mine.artist_name}</p></b></center>
+              <div className="card-content valign-wrapper">
+                <center><b><p><font size="5">{mine.artist_name}</font></p></b></center>
               </div>
               <div className="card-action">
                 <center>
@@ -125,8 +125,8 @@ class UserSearch extends Component{
               <img src={search.artist_image}/>
             </div>
             <div className="card-stacked">
-              <div className="card-content">
-                <center><b><p>{search.artist_name}</p></b></center>
+              <div className="card-content valign-wrapper">
+                <center><b><p><font size="5">{search.artist_name}</font></p></b></center>
               </div>
               <div className="card-action">
                 <center>
