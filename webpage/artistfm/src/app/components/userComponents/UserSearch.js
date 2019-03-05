@@ -63,7 +63,7 @@ class UserSearch extends Component{
               </div>
               <div className="card-stacked">
                 <div className="card-content">
-                  <center><b><h6 className="header">{gen.artist_name}</h6></b></center>
+                <center><b><h6>{gen.artist_name}</h6></b></center>
                 </div>
                 <div className="card-action">
                   <center>
@@ -91,7 +91,7 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content">
-                <h6 className="header">{mine.artist_name}</h6>
+              <center><b><h6>{mine.artist_name}</h6></b></center>
               </div>
               <div className="card-action">
                 <center>
@@ -119,7 +119,7 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content">
-                <h6 className="header">{search.artist_name}</h6>
+                <center><b><h6>{search.artist_name}</h6></b></center>
               </div>
               <div className="card-action">
                 <center>
@@ -144,7 +144,7 @@ class UserSearch extends Component{
         
         <div className="container">
           <nav>
-            <div className="nav-wrapper cyan darken-2">
+            <div className="nav-wrapper cyan darken-1">
               <form>
                 <div className="input-field">
                   <input id="search" type="search" onChange = {this.handleChange} required/>
