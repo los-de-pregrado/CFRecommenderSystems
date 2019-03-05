@@ -16,7 +16,7 @@ class ModelBuilder:
     k_value = 40
     gamma = 15
     full_trainset = None
-    similarity_equation = 'pearson'
+    similarity_equation = 'jaccard'
     sim_options_mclaughlin = {
         'name': similarity_equation,
         'user_based': True
@@ -56,7 +56,7 @@ class ModelBuilder:
 
         return top_n
 
-    def predict(self, user_id, top_n=10):
+    def predict_for_user(self, user_id, top_n=10):
         """
         Returns all predicitions for the given user
         """
@@ -84,7 +84,14 @@ class ModelBuilder:
         # unrated_artists_and_users = self.full_trainset.build_anti_testset()
 
         # print(unrated_artists_and_users[:2])
-
+    def predict(self, top_n=10):
+        """
+        Returns all predicitions for all users
+        """
+        testset = self.full_trainset.build_anti_testset()
+        predictions = self.algorithm.test(testset)
+        return self.get_top_n(predictions, n=top_n)
+        
 # Create the top n predictions
 # initial_predictions = algorithm.test(unrated_artists_and_users)
 
@@ -96,5 +103,5 @@ class ModelBuilder:
 
 start_time = time.time()
 model_builder = ModelBuilder()
-top_10_predictions = model_builder.predict('user_000134')
+top_10_predictions = model_builder.predict()
 print('Time elapsed for {}: {:9.2f} seconds'.format(model_builder.similarity_equation, time.time()-start_time))

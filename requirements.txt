@@ -2,4 +2,3 @@ surprise
 numpy
 pandas
 matplotlib
-django
