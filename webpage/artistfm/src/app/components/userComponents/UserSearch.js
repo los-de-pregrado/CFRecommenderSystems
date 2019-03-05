@@ -68,7 +68,7 @@ class UserSearch extends Component{
               </div>
               <div className="card-stacked">
                 <div className="card-content">
-                <center><b><h6>{gen.artist_name}</h6></b></center>
+                <center><b><p>{gen.artist_name}</p></b></center>
                 </div>
                 <div className="card-action">
                   <center>
@@ -78,7 +78,7 @@ class UserSearch extends Component{
                       changeRating={this.changeRating}
                       numberOfStars={5}
                       name={gen.artist_brainzmusic}
-                      starDimension = '20px'
+                      starDimension ="15px"
                     />
                   </center>
                 </div>
@@ -97,7 +97,7 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content">
-              <center><b><h6>{mine.artist_name}</h6></b></center>
+              <center><b><p>{mine.artist_name}</p></b></center>
               </div>
               <div className="card-action">
                 <center>
@@ -125,7 +125,7 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content">
-                <center><b><h6>{search.artist_name}</h6></b></center>
+                <center><b><p>{search.artist_name}</p></b></center>
               </div>
               <div className="card-action">
                 <center>
