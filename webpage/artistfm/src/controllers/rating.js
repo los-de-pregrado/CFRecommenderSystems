@@ -20,12 +20,21 @@ module.exports = {
         .catch((error) => res.status(400).send(error));
     },
     post(req,res){
-        return Rating.create({            
-            rating_value: req.body.rating_value,
-            UserId: req.body.user_id,
-            ArtistId: req.body.artist_id,
-        }).then((rating) => res.status(201).send(rating))
-        .catch((error) => res.status(400).send(error));
+        return Rating.findAll({
+            where:{ArtistId:req.body.artist_id, UserId: req.body.user_id}
+        }).then((ratings) => {
+            if(ratings.length > 0){
+                return res.status(404).send({
+                    message: 'That rating already exists',
+                });
+            }
+            return Rating.create({            
+                rating_value: req.body.rating_value,
+                UserId: req.body.user_id,
+                ArtistId: req.body.artist_id,
+            }).then((rating) => res.status(201).send(rating))
+            .catch((error) => res.status(400).send(error));
+        }).catch((error) => res.status(400).send(error));
     },
     put(req,res){
         return Rating.findById(req.params.id)
