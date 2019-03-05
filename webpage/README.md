@@ -1,2 +1,0 @@
-# Grupo04
-NodeJS
