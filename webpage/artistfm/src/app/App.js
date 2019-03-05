@@ -57,8 +57,8 @@ class App extends Component{
   logIn(conectado){
     const idLogeado = conectado.idIdentified;
     var nombreLogeado = '';
-    fetch('/api/admin/'+idLogeado).then(res => res.json()).then(data => {     
-        nombreLogeado = data.admin_names;        
+    fetch('/api/user/'+idLogeado).then(res => res.json()).then(data => {     
+        nombreLogeado = data.user_names;        
         this.setState({
           login: false,
           signup: false,
@@ -171,11 +171,11 @@ class App extends Component{
           :this.state.iniciado?
             this.state.viendoConcursos?
             <div>
-              <AdminContests idLogged = {this.state.idIniciado}/>   
+              <UserSearch idLogged = {this.state.idIniciado}/>   
             </div> 
             :
             <div>
-              <AdminProfile idLogged = {this.state.idIniciado}/>   
+              <UserProfile idLogged = {this.state.idIniciado}/>   
             </div>
           :
           <div>

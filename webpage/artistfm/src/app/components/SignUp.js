@@ -6,11 +6,12 @@ class SignUp extends Component{
   constructor(){
     super();
     this.state = {
-      admin_names:'',
-      admin_lastnames:'',
-      admin_password_confirm:'',
-      admin_email:'',
-      admin_password:''      
+      user_names:'',
+      user_lastnames:'',
+      user_password_confirm:'',
+      user_email:'',
+      user_password:'',
+      user_image: ''     
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);    
@@ -27,21 +28,21 @@ class SignUp extends Component{
     e.preventDefault();
     var identified = false;    
       
-    if(this.state.admin_password != this.state.admin_password_confirm){
+    if(this.state.user_password != this.state.user_password_confirm){
       M.toast({html:'Las contraseñas no coinciden', classes: 'rounded'});
     }
-    else if(this.state.admin_password.length < 8){
+    else if(this.state.user_password.length < 8){
       M.toast({html:'La contraseña debe tener 8 caracteres mínimo', classes: 'rounded'});
     }   
-    else if(this.state.admin_password == '' || this.state.admin_names == '' || this.state.admin_lastnames == '' || this.state.admin_email == ''){
+    else if(this.state.user_password == '' || this.state.user_names == '' || this.state.user_lastnames == '' || this.state.user_email == '' || this.state.user_image == ''){
       M.toast({html:'Ingresa valores válidos para registrarse', classes: 'rounded'});
     }
     else{
-      const nuevoAdmin = {admin_names: this.state.admin_names,admin_lastnames:this.state.admin_lastnames, admin_email:this.state.admin_email, admin_password: this.state.admin_password};
+      const nuevoUser = {user_names: this.state.user_names,user_lastnames:this.state.user_lastnames, user_email:this.state.user_email, user_password: this.state.user_password, user_image: this.state.user_image};
       
-      fetch('/api/admin',{
+      fetch('/api/user',{
         method: 'POST',
-        body: JSON.stringify(nuevoAdmin),
+        body: JSON.stringify(nuevoUser),
         headers:{
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -50,7 +51,7 @@ class SignUp extends Component{
             return res.json();                
           } 
           else{
-            throw new Error("Ya existe una cuenta de administrador con este correo electrónico");
+            throw new Error("Ya existe una cuenta de usuario con este correo electrónico");
         }}).then(data => {
           M.toast({html:'Se ha creado la cuenta correctamente', classes: 'rounded'});
             const idIdentified = data.id;            
@@ -77,32 +78,38 @@ class SignUp extends Component{
                       <br></br>
                       <div className="row">
                           <div className="input-field col s6">
-                              <input id="admin_names" type="text" className="validate" onChange = {this.handleInput}/>
-                              <label htmlFor="admin_names">Nombres</label>
+                              <input id="user_names" type="text" className="validate" onChange = {this.handleInput}/>
+                              <label htmlFor="user_names">Nombres</label>
                           </div>
                           <div className="input-field col s6">
-                              <input id="admin_lastnames" type="text" className="validate" onChange = {this.handleInput}/>
-                              <label htmlFor="admin_lastnames">Apellidos</label>
+                              <input id="user_lastnames" type="text" className="validate" onChange = {this.handleInput}/>
+                              <label htmlFor="user_lastnames">Apellidos</label>
                           </div>
                       </div>
                       <div className="row">
                           <div className="input-field col s12">
-                              <input id="admin_email" type="email" className="validate" onChange = {this.handleInput}/>
-                              <label htmlFor="admin_email">Correo Electrónico</label>
+                              <input id="user_image" type="text" className="validate" onChange = {this.handleInput}/>
+                              <label htmlFor="user_image">Imagen de perfil</label>
+                          </div>
+                      </div>
+                      <div className="row">
+                          <div className="input-field col s12">
+                              <input id="user_email" type="email" className="validate" onChange = {this.handleInput}/>
+                              <label htmlFor="user_email">Correo Electrónico</label>
                               <span className="helper-text" data-error="No es válido" data-success="Es válido">Escribe tu correo...</span>
                           </div>
                       </div>
                       <div className="row">
                           <div className="input-field col s12">
-                          <input id="admin_password" type="password" className="validate" onChange = {this.handleInput}/>
-                          <label htmlFor="admin_password">Contraseña</label>
+                          <input id="user_password" type="password" className="validate" onChange = {this.handleInput}/>
+                          <label htmlFor="user_password">Contraseña</label>
                           <span className="helper-text">Debe tener mínimo 8 caracteres</span>
                           </div>
                       </div>
                       <div className="row">
                           <div className="input-field col s12">
-                          <input id="admin_password_confirm" type="password" className="validate" onChange = {this.handleInput}/>
-                          <label htmlFor="admin_password_confirm">Confirmación contraseña</label>
+                          <input id="user_password_confirm" type="password" className="validate" onChange = {this.handleInput}/>
+                          <label htmlFor="user_password_confirm">Confirmación contraseña</label>
                           <span className="helper-text">Vuelve a escribir tu contraseña</span>
                           </div>
                       </div>  

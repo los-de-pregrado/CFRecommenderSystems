@@ -8,41 +8,21 @@ class UserSearch extends Component{
     this.state={
         idLogged : this.props.idLogged,
         user:{},
-        concursos: [],
-        agregando: false,
-        cambiando : null,
-        borrando: null,        
-        contestActivo : null
+        toptengen: [],
+        toptenmine: []
     }
     
-    this.actualizar = this.actualizar.bind(this);    
-    this.toContestList = this.toContestList.bind(this);
+    this.actualizar = this.actualizar.bind(this);
 
     this.actualizar();
   }
 
   actualizar(){
-    fetch('/api/user/'+this.state.idLogged).then(res => res.json()).then(data => {        
-        if(data.Contests == null){
+    fetch('/api/user/'+this.state.idLogged).then(res => res.json()).then(data => {       
             this.setState({
                 user:data
-            });
-        }
-        else{
-            this.setState({
-                user:data,
-                concursos: data.Contests
-            });
-        }       
+            });         
       });
-  }
-
-  toContestList(){
-    this.setState({
-      cambiando: null,
-      agregando: false,
-      contestActivo : null
-    })
   }
   
   componentDidMount(){
