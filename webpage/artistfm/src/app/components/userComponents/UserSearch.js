@@ -107,6 +107,7 @@ class UserSearch extends Component{
                     changeRating={this.changeRating}
                     numberOfStars={5}
                     name={mine.artist_brainzmusic}
+                    starDimension ="15px"
                   />
                 </center>
               </div>
@@ -135,6 +136,7 @@ class UserSearch extends Component{
                     changeRating={this.changeRating}
                     numberOfStars={5}
                     name={search.artist_brainzmusic}
+                    starDimension ="15px"
                   />
                 </center>
               </div>
