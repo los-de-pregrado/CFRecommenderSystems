@@ -34,8 +34,8 @@ class UserSearch extends Component{
   handleChange(e){
     const {value, id} = e.target;
     
-    if(value != ''){
-      fetch('/api/artist/search/'+value).then(res=>res.json()).then(data =>{
+    if(value !== ''){
+      fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
         console.log
         this.setState({
           toptensearch: data
