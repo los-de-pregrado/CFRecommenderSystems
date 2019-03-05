@@ -56,14 +56,14 @@ class UserSearch extends Component{
 
     const gens = this.state.toptengen.map((gen,i)=>{
         return(
-          <div className="col s12" key = {gen.artist_brainzmusic}>
+          <div className="col s12" key = {gen.artist_musicbrainz}>
             <div className="card horizontal">
               <div className="card-image">
                 <img src={gen.artist_image}/>
               </div>
               <div className="card-stacked">
                 <div className="card-content">
-                  <h6 className="header">{gen.artist_name}</h6>
+                  <center><b><h6 className="header">{gen.artist_name}</h6></b></center>
                 </div>
                 <div className="card-action">
                   <center>
@@ -84,7 +84,7 @@ class UserSearch extends Component{
 
     const mines = this.state.toptenmine.map((mine,i)=>{
       return(
-        <div className="col s12" key = {mine.artist_brainzmusic}>
+        <div className="col s12" key = {mine.artist_musicbrainz}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={mine.artist_image}/>
@@ -112,7 +112,7 @@ class UserSearch extends Component{
 
     const searches = this.state.toptensearch.map((search,i)=>{
       return(
-        <div className="col s12" key = {search.artist_brainzmusic}>
+        <div className="col s12" key = {search.artist_musicbrainz}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={search.artist_image}/>
@@ -142,17 +142,19 @@ class UserSearch extends Component{
         
       <div>
         
-        <nav>
-          <div className="nav-wrapper cyan darken-2">
-            <form>
-              <div className="input-field">
-                <input id="search" type="search" onChange = {this.handleChange} required/>
-                <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
-                <i className="material-icons">close</i>
-              </div>
-            </form>
-          </div>
-        </nav>
+        <div className="container">
+          <nav>
+            <div className="nav-wrapper cyan darken-2">
+              <form>
+                <div className="input-field">
+                  <input id="search" type="search" onChange = {this.handleChange} required/>
+                  <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
+                  <i className="material-icons">close</i>
+                </div>
+              </form>
+            </div>
+          </nav>
+        </div>
 
         <br></br>
 
