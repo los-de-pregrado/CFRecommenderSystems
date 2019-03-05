@@ -34,11 +34,13 @@ class UserSearch extends Component{
   handleChange(e){
     const {value, id} = e.target;
     
-    fetch('/api/artist/search/'+value).then(res=>res.json()).then(data =>{
-      this.setState({
-        toptensearch: data
+    if(value != ''){
+      fetch('/api/artist/search/'+value).then(res=>res.json()).then(data =>{
+        this.setState({
+          toptensearch: data
+        });
       });
-    });
+    }    
   }
 
   changeRating(){
@@ -140,7 +142,7 @@ class UserSearch extends Component{
       <div>
         
         <nav>
-          <div className="nav-wrapper">
+          <div className="nav-wrapper cyan darken-2">
             <form>
               <div className="input-field">
                 <input id="search" type="search" onChange = {this.handleChange} required/>

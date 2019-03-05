@@ -28,7 +28,7 @@ class UserProfile extends Component{
             <div className = "row">
               <div className = "col s4">
                 <center>
-                  <img class="responsive-img" src={this.state.user.user_image}/>
+                  <img className="responsive-img" src={this.state.user.user_image}/>
                 </center>
               </div>
               <div className = "col s8">
