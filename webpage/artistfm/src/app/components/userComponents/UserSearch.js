@@ -41,7 +41,12 @@ class UserSearch extends Component{
           toptensearch: data
         });
       });
-    }    
+    }
+    else{
+      this.setState({
+        toptensearch: []
+      });
+    }  
   }
 
   changeRating(){
