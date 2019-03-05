@@ -78,6 +78,7 @@ class UserSearch extends Component{
                       changeRating={this.changeRating}
                       numberOfStars={5}
                       name={gen.artist_brainzmusic}
+                      starDimension = '20px'
                     />
                   </center>
                 </div>
