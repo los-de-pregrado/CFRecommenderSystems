@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Rating = sequelize.define('Rating', {
-    rating_value: DataTypes.DOUBLE
+    rating_value: DataTypes.FLOAT
   }, {});
   Rating.associate = function(models) {
     models.Rating.belongsTo(models.Artist,{
