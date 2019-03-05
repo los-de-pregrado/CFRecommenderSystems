@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import dateFormat from 'dateformat';
+import DataFrame from "dataframe-js";
 
 class UserProfile extends Component{
 
@@ -17,7 +18,8 @@ class UserProfile extends Component{
   }
   
   componentDidMount(){
-    document.dispatchEvent(new Event('component'));       
+    document.dispatchEvent(new Event('component'));
+    csvratings = DataFrame.fromCSV('./batch/list.csv').then(df => df);
   }
 
   render(){

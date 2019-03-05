@@ -10,7 +10,7 @@ module.exports = {
     getByName(req,res){
         return Artist.findAll({
             where:{artist_name:{$iLike:'%'+req.params.name+'%'}},
-            limit: 20
+            limit: 10
         }).then((artists) => res.status(200).send(artists))
         .catch((error) => res.status(400).send(error));
     },

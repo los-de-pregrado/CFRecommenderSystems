@@ -7,5 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     user_password: DataTypes.STRING,
     user_image: DataTypes.STRING
   }, {});
+  User.associate = function(models) {
+    models.User.hasMany(models.Rating, {as: 'artist_ratings'});
+  };
   return User;
 };
