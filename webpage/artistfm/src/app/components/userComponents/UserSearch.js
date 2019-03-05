@@ -34,19 +34,27 @@ class UserSearch extends Component{
   handleChange(e){
     const {value, id} = e.target;
     
-    if(value !== ''){
-      fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
-        console.log
-        this.setState({
-          toptensearch: data
+    try{
+      if(value !== ''){
+        fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
+          console.log
+          this.setState({
+            toptensearch: data
+          });
         });
-      });
+      }
+      else{
+        this.setState({
+          toptensearch: []
+        });
+      }  
     }
-    else{
+    catch(e){
       this.setState({
         toptensearch: []
       });
-    }  
+    }
+    
   }
 
   changeRating(){
@@ -68,7 +76,7 @@ class UserSearch extends Component{
               </div>
               <div className="card-stacked">
                 <div className="card-content valign-wrapper">
-                  <center><b><p><font size="5">{gen.artist_name}</font></p></b></center>
+                  <font size="5"><b><p className ="center-align">{gen.artist_name}</p></b></font>
                 </div>
                 <div className="card-action">
                   <center>
@@ -97,7 +105,7 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content valign-wrapper">
-                <center><b><p><font size="5">{mine.artist_name}</font></p></b></center>
+              <font size="5"><b><p className ="center-align">{mine.artist_name}</p></b></font>
               </div>
               <div className="card-action">
                 <center>
@@ -126,7 +134,7 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content valign-wrapper">
-                <b><p className ="center-align"><font size="5">{search.artist_name}</font></p></b>
+                <font size="5"><b><p className ="center-align">{search.artist_name}</p></b></font>
               </div>
               <div className="card-action">
                 <center>
