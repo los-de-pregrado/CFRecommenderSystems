@@ -126,7 +126,7 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content valign-wrapper">
-                <center><b><p><font size="5">{search.artist_name}</font></p></b></center>
+                <b><p className ="center-align"><font size="5">{search.artist_name}</font></p></b>
               </div>
               <div className="card-action">
                 <center>
