@@ -4,7 +4,6 @@ const Rating = require('../models').Rating;
 module.exports = {
     getAll(req,res){
         return User.findAll({
-            include: [Rating],
             order: [['createdAt', 'DESC'],],
         }).then((users) => res.status(200).send(users))
         .catch((error) => res.status(400).send(error));
