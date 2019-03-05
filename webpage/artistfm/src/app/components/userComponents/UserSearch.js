@@ -36,6 +36,7 @@ class UserSearch extends Component{
     
     if(value != ''){
       fetch('/api/artist/search/'+value).then(res=>res.json()).then(data =>{
+        console.log
         this.setState({
           toptensearch: data
         });
@@ -146,7 +147,7 @@ class UserSearch extends Component{
             <form>
               <div className="input-field">
                 <input id="search" type="search" onChange = {this.handleChange} required/>
-                <label className="label-icon" for="search"><i className="material-icons">search</i></label>
+                <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
                 <i className="material-icons">close</i>
               </div>
             </form>
@@ -159,6 +160,8 @@ class UserSearch extends Component{
         
           <div className = "col s4">
             <center><h5>Resultados</h5></center>
+            <br></br>
+            {searches}
           </div>
 
           <div className = "col s4">

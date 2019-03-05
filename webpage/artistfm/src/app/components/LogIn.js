@@ -62,7 +62,7 @@ class LogIn extends Component{
                         <br></br>                    
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="user_email" type="email" className="validate" onChange = {this.handleInput}/>
+                                <input id="user_email" type="text" className="validate" onChange = {this.handleInput}/>
                                 <label htmlFor="user_email">Correo Electrónico</label>
                             </div>
                         </div>

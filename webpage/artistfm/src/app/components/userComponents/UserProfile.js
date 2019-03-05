@@ -9,7 +9,7 @@ class UserProfile extends Component{
         idLogged : this.props.idLogged,
         user:{},         
     }
-    fetch('/api/user/'+this.state.idLogged).then(res => res.json()).then(data => {        
+    fetch('/api/user/'+this.state.idLogged).then(res => res.json()).then(data => {  
         this.setState({
           user:data
         });                        
