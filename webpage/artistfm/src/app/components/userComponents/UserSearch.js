@@ -34,27 +34,24 @@ class UserSearch extends Component{
   handleChange(e){
     const {value, id} = e.target;
     
-    try{
-      if(value !== ''){
-        fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
-          console.log
-          this.setState({
-            toptensearch: data
-          });
-        });
-      }
-      else{
-        this.setState({
-          toptensearch: []
-        });
-      }  
-    }
-    catch(e){
+    if(value.replace(/\s/g,'').length == 0){
       this.setState({
         toptensearch: []
       });
     }
-    
+    else if(value !== ''){
+      fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
+        console.log
+        this.setState({
+          toptensearch: data
+        });
+      });
+    }
+    else{
+      this.setState({
+        toptensearch: []
+      });
+    }
   }
 
   changeRating(){
