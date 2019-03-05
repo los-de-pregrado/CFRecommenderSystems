@@ -14,12 +14,14 @@ class UserProfile extends Component{
         this.setState({
           user:data
         });                        
-      });    
+      });  
   }
   
   componentDidMount(){
     document.dispatchEvent(new Event('component'));
-    csvratings = DataFrame.fromCSV('./batch/list.csv').then(df => df);
+    fetch('api/ratings/byuser/'+this.state.idLogged).then(res=>res.json()).then(data=>{
+      this.props.getRatings(data);
+    })
   }
 
   render(){

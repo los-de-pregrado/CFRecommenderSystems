@@ -18,7 +18,8 @@ class App extends Component{
       signup: false,
       idIniciado: 0,
       nombreIniciado: '',
-      onSearch: false
+      onSearch: false,
+      ratings: []
     }    
     this.toLogin = this.toLogin.bind(this);
     this.toSignUp = this.toSignUp.bind(this);
@@ -27,6 +28,7 @@ class App extends Component{
     this.toHome = this.toHome.bind(this);
     this.toProfile = this.toProfile.bind(this);
     this.toSearch = this.toSearch.bind(this);
+    this.getRatingsLogged= this.getRatingsLogged.bind(this);
   }
 
   toLogin(){
@@ -82,7 +84,8 @@ class App extends Component{
       iniciado: false,
       idIniciado: 0,
       nombreIniciado : 0,
-      onSearch : false 
+      onSearch : false,
+      ratings: []
     });
     M.toast({html:'Sesión cerrada', classes: 'rounded'});
   }
@@ -91,6 +94,10 @@ class App extends Component{
     this.setState({
       onSearch: true
     });
+  }
+
+  getRatingsLogged(data){
+
   }
 
   render(){   
@@ -171,11 +178,11 @@ class App extends Component{
           :this.state.iniciado?
             this.state.onSearch?
             <div>
-              <UserSearch idLogged = {this.state.idIniciado}/>   
+              <UserSearch idLogged = {this.state.idIniciado} ratings = {this.state.ratings}/>   
             </div> 
             :
             <div>
-              <UserProfile idLogged = {this.state.idIniciado}/>   
+              <UserProfile idLogged = {this.state.idIniciado} getRatings = {this.getRatingsLogged}/>   
             </div>
           :
           <div>

@@ -33,6 +33,7 @@ router.delete('/api/artist/:artist_id/song/:id', songController.delete);
 router.get('/api/rating/', ratingController.getAll);
 router.get('/api/rating/byuser/:id', ratingController.getByUser);
 router.get('/api/rating/byartist/:id', ratingController.getByArtist);
+router.post('/api/rating/', ratingController.post);
 router.put('/api/rating/:id', ratingController.put);
 router.delete('/api/rating/:id', ratingController.delete);
 
