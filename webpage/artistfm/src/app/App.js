@@ -18,7 +18,7 @@ class App extends Component{
       signup: false,
       idIniciado: 0,
       nombreIniciado: '',
-      viendoConcursos: false
+      onSearch: false
     }    
     this.toLogin = this.toLogin.bind(this);
     this.toSignUp = this.toSignUp.bind(this);
@@ -26,7 +26,7 @@ class App extends Component{
     this.logIn = this.logIn.bind(this);
     this.toHome = this.toHome.bind(this);
     this.toProfile = this.toProfile.bind(this);
-    this.toContests = this.toContests.bind(this);
+    this.toSearch = this.toSearch.bind(this);
   }
 
   toLogin(){
@@ -71,7 +71,7 @@ class App extends Component{
 
   toProfile(){
     this.setState({
-      viendoConcursos: false
+      onSearch: false
     }); 
   }
 
@@ -82,14 +82,14 @@ class App extends Component{
       iniciado: false,
       idIniciado: 0,
       nombreIniciado : 0,
-      viendoConcursos : false 
+      onSearch : false 
     });
     M.toast({html:'Sesión cerrada', classes: 'rounded'});
   }
 
-  toContests(){
+  toSearch(){
     this.setState({
-      viendoConcursos: true
+      onSearch: true
     });
   }
 
@@ -110,7 +110,7 @@ class App extends Component{
                     this.state.iniciado?
                     <div>
                       <li><a onClick = {this.toProfile}>Mi perfil</a></li>
-                      <li><a onClick = {this.toContests}>Buscar</a></li>
+                      <li><a onClick = {this.toSearch}>Buscar</a></li>
                       <li><a className="modal-trigger" href="#confirmModal">Salir</a></li>                      
                     </div>
                     :
@@ -147,7 +147,7 @@ class App extends Component{
           this.state.iniciado?
           <ul className="sidenav" id="mobile-demo">      
               <li><a onClick = {this.toProfile}>Mi perfil</a></li>
-              <li><a onClick = {this.toContests}>Buscar</a></li>
+              <li><a onClick = {this.toSearch}>Buscar</a></li>
               <li><a className="modal-trigger" href="#confirmModal">Salir</a></li>                        
           </ul>
           :
@@ -169,7 +169,7 @@ class App extends Component{
             <SignUp enableSignUp = {this.logIn}/>   
           </div>          
           :this.state.iniciado?
-            this.state.viendoConcursos?
+            this.state.onSearch?
             <div>
               <UserSearch idLogged = {this.state.idIniciado}/>   
             </div> 
