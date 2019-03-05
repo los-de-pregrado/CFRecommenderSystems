@@ -19,6 +19,7 @@ router.get('/api/artist/:id', artistController.get);
 router.post('/api/artist/', artistController.post);
 router.put('/api/artist/:id', artistController.put);
 router.delete('/api/artist/:id', artistController.delete);
+router.get('/api/artist/search/:name', artistController.getByName);
 
 // Song
 router.get('/api/artist/:artist_id/song/', songController.getAll);

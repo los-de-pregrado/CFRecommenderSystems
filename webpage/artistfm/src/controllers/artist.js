@@ -7,6 +7,13 @@ module.exports = {
         }).then((artists) => res.status(200).send(artists))
         .catch((error) => res.status(400).send(error));
     },
+    getByName(req,res){
+        return Artist.findAll({
+            where:{artist_name:'%'+req.params.name+'%'},
+            limit: 20
+        }).then((artists) => res.status(200).send(artists))
+        .catch((error) => res.status(400).send(error));
+    },
     get(req, res){
         return Artist.findById(req.params.id)
         .then((artist) =>{

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import copy from 'copy-to-clipboard';
+import StarRatings from './react-star-ratings';
 
 class UserSearch extends Component{
 
@@ -9,10 +9,16 @@ class UserSearch extends Component{
         idLogged : this.props.idLogged,
         user:{},
         toptengen: [],
-        toptenmine: []
+        toptenmine: [],
+        toptensearch: [],
+        toptengenrates: [],
+        toptenminerates: [],
+        toptensearchrates: []
     }
     
     this.actualizar = this.actualizar.bind(this);
+    this.changeRating = this.changeRating.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.actualizar();
   }
@@ -25,78 +31,140 @@ class UserSearch extends Component{
       });
   }
   
+  handleChange(e){
+    const {value, id} = e.target;
+    
+    fetch('/api/artist/search/'+value).then(res=>res.json()).then(data =>{
+      this.setState({
+        toptensearch: data
+      });
+    });
+  }
+
   componentDidMount(){
     document.dispatchEvent(new Event('component'));      
   }
 
   render(){
 
-    const concursos = this.state.concursos.map((concurso,i)=>{
+    const gens = this.state.toptengen.map((gen,i)=>{
         return(
-            <div className = "col s4" key = {concurso.id}>
-                <div className="card medium sticky-action">
-                    <div className="card-image waves-effect waves-block waves-light">
-                        <img className="activator" src={"./imagesbanner/"+concurso.contest_banner}/>
-                    </div>
-                    <div className="card-content">
-                        <span className="card-title activator grey-text text-darken-4">{concurso.contest_name}<i className="material-icons right">more_vert</i></span>
-                        <p><i>/{concurso.contest_url}</i></p>
-                    </div>
-                    <div className="card-reveal">
-                        <span className="card-title grey-text text-darken-4">{concurso.contest_name}<i className="material-icons right">close</i></span>
-                        <p><b>Guión: </b>"{concurso.contest_script}"</p>
-                        <p><b>Descripción y recomendaciones:</b> {concurso.contest_guidelines}</p>
-                    </div>
-                    <div className="card-action">
-                        <a href="#" onClick = {() => this.toContestProfile(concurso)} className="black-text"><b>Abrir</b></a>
-                        <a href="#" onClick = {() => this.compartirURL(concurso.contest_url)} className="black-text"><b>Compartir</b></a>
-                        <a href="#confirmDeleteModal" onClick = {() => this.toDelete(concurso.id)} className="modal-trigger black-text"><i className="material-icons right">delete</i></a>
-                        <a href="#" onClick = {() => this.toEdit(concurso)} className="black-text"><i className="material-icons right">edit</i></a>
-                    </div>
-                </div>              
+          <div class="col s12" key = {gen.artist_brainzmusic}>
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src={gen.artist_image}/>
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h6 className="header">{gen.artist_name}</h6>
+                </div>
+                <div class="card-action">
+                  <center>
+                    <StarRatings
+                      rating={this.state.toptengenrates[i]}
+                      starRatedColor="blue"
+                      changeRating={this.changeRating}
+                      numberOfStars={5}
+                      name={gen.artist_brainzmusic}
+                    />
+                  </center>
+                </div>
+              </div>
             </div>
+          </div>
           )
+    })
+
+    const mines = this.state.toptenmine.map((mine,i)=>{
+      return(
+        <div class="col s12" key = {mine.artist_brainzmusic}>
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src={mine.artist_image}/>
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <h6 className="header">{mine.artist_name}</h6>
+              </div>
+              <div class="card-action">
+                <center>
+                  <StarRatings
+                    rating={this.state.toptenminerates[i]}
+                    starRatedColor="blue"
+                    changeRating={this.changeRating}
+                    numberOfStars={5}
+                    name={mine.artist_brainzmusic}
+                  />
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        )
+    })
+
+    const searches = this.state.toptensearch.map((search,i)=>{
+      return(
+        <div class="col s12" key = {search.artist_brainzmusic}>
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src={search.artist_image}/>
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <h6 className="header">{search.artist_name}</h6>
+              </div>
+              <div class="card-action">
+                <center>
+                  <StarRatings
+                    rating={this.state.toptensearchrates[i]}
+                    starRatedColor="blue"
+                    changeRating={this.changeRating}
+                    numberOfStars={5}
+                    name={search.artist_brainzmusic}
+                  />
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        )
     })
 
     return(
         
       <div>
-        {
-          this.state.contestActivo==null?
-          <div className = "container">
-            <center><h5>Mis concursos {!this.state.agregando?<a onClick = {this.toAdd} className="btn-floating btn-large waves-effect waves-light red darken-3"><i className="material-icons">add</i></a>:null}</h5></center>
-            <br></br>
-            
-            {
-              this.state.agregando?
-              <div className = "row">
-                <div className = "container">
-                  <AddContest post = {this.postContest} put = {this.putContest} idLogged = {this.state.user.id} concurso = {this.state.cambiando}/> 
-                </div>
-                <br></br>
-              </div>              
-              :null 
-            }      
-            
-            <div className = "row">
-                {concursos}
-            </div>
-          </div>
-          :
-          <ContestProfile contest = {this.state.contestActivo} salir = {this.toContestList} externo = {false}/>
-        }   
-
-        <div id="confirmDeleteModal" className="modal s6">
-          <div className="modal-content">
-            <h4>Eliminar el concurso</h4>
-            <p>Si el concurso tiene voces de participantes, éstas serán eliminadas también. ¿Estás seguro que deseas eliminar este concurso?</p>
-          </div>
-          <div className="modal-footer">
-            <a href="#" className="modal-close waves-effect waves-green btn-flat">No</a>
-            <a onClick = {() => this.deleteContest(this.state.borrando)} className="modal-close waves-effect waves-green btn-flat">Sí, estoy seguro</a>
-          </div>
-        </div>
         
+        <nav>
+          <div class="nav-wrapper">
+            <form>
+              <div class="input-field">
+                <input id="search" type="search" onChange = {this.handleChange} required/>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+        </nav>
+
+        <br></br>
+
+        <div className ="row">
+        
+          <div className = "col s4">
+            <center><h5>Resultados</h5></center>
+          </div>
+
+          <div className = "col s4">
+            <center><h5>Los más gustados</h5></center>
+          </div>
+
+          <div className = "col s4">
+            <center><h5>Por usuarios parecidos a ti</h5></center>
+          </div>  
+        
+        </div>
+
       </div>
         
     )
