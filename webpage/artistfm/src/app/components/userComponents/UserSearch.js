@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import StarRatings from 'react-star-ratings';
 
-class UserSearch extends Component{
+className UserSearch extends Component{
 
   constructor(props){
     super(props);    
@@ -41,6 +41,10 @@ class UserSearch extends Component{
     });
   }
 
+  changeRating(){
+
+  }
+
   componentDidMount(){
     document.dispatchEvent(new Event('component'));      
   }
@@ -49,16 +53,16 @@ class UserSearch extends Component{
 
     const gens = this.state.toptengen.map((gen,i)=>{
         return(
-          <div class="col s12" key = {gen.artist_brainzmusic}>
-            <div class="card horizontal">
-              <div class="card-image">
+          <div className="col s12" key = {gen.artist_brainzmusic}>
+            <div className="card horizontal">
+              <div className="card-image">
                 <img src={gen.artist_image}/>
               </div>
-              <div class="card-stacked">
-                <div class="card-content">
+              <div className="card-stacked">
+                <div className="card-content">
                   <h6 className="header">{gen.artist_name}</h6>
                 </div>
-                <div class="card-action">
+                <div className="card-action">
                   <center>
                     <StarRatings
                       rating={this.state.toptengenrates[i]}
@@ -77,16 +81,16 @@ class UserSearch extends Component{
 
     const mines = this.state.toptenmine.map((mine,i)=>{
       return(
-        <div class="col s12" key = {mine.artist_brainzmusic}>
-          <div class="card horizontal">
-            <div class="card-image">
+        <div className="col s12" key = {mine.artist_brainzmusic}>
+          <div className="card horizontal">
+            <div className="card-image">
               <img src={mine.artist_image}/>
             </div>
-            <div class="card-stacked">
-              <div class="card-content">
+            <div className="card-stacked">
+              <div className="card-content">
                 <h6 className="header">{mine.artist_name}</h6>
               </div>
-              <div class="card-action">
+              <div className="card-action">
                 <center>
                   <StarRatings
                     rating={this.state.toptenminerates[i]}
@@ -105,16 +109,16 @@ class UserSearch extends Component{
 
     const searches = this.state.toptensearch.map((search,i)=>{
       return(
-        <div class="col s12" key = {search.artist_brainzmusic}>
-          <div class="card horizontal">
-            <div class="card-image">
+        <div className="col s12" key = {search.artist_brainzmusic}>
+          <div className="card horizontal">
+            <div className="card-image">
               <img src={search.artist_image}/>
             </div>
-            <div class="card-stacked">
-              <div class="card-content">
+            <div className="card-stacked">
+              <div className="card-content">
                 <h6 className="header">{search.artist_name}</h6>
               </div>
-              <div class="card-action">
+              <div className="card-action">
                 <center>
                   <StarRatings
                     rating={this.state.toptensearchrates[i]}
@@ -136,12 +140,12 @@ class UserSearch extends Component{
       <div>
         
         <nav>
-          <div class="nav-wrapper">
+          <div className="nav-wrapper">
             <form>
-              <div class="input-field">
+              <div className="input-field">
                 <input id="search" type="search" onChange = {this.handleChange} required/>
-                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
+                <label className="label-icon" for="search"><i className="material-icons">search</i></label>
+                <i className="material-icons">close</i>
               </div>
             </form>
           </div>
