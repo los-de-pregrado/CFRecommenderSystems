@@ -108,21 +108,21 @@ class UserSearch extends Component{
     */
 
     if(type == 1){
-      let lista = {...this.state.toptensearchrates};
+      let lista =this.state.toptensearchrates;
       lista[i]=rating;
       this.setState({
         toptensearchrates: lista
       });
     }
     else if(type == 2){
-      let lista = {...this.state.toptengenrates};
+      let lista = this.state.toptengenrates;
       lista[i]=rating;
       this.setState({
         toptengenrates: lista
       });
     }
     else{
-      let lista = {...this.state.toptenminerates};
+      let lista = this.state.toptenminerates;
       lista[i]=rating;
       this.setState({
         toptenminerates: lista
