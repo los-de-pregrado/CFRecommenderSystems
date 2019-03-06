@@ -20,7 +20,7 @@ class UserProfile extends Component{
     document.dispatchEvent(new Event('component'));
     fetch('api/rating/byuser/'+this.state.idLogged).then(res=>res.json()).then(data=>{
       this.props.getRatings(data);
-    })
+    });
   }
 
   render(){

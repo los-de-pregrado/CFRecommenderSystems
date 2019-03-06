@@ -70,8 +70,36 @@ class UserSearch extends Component{
     }
   }
 
-  changeRating(){
-
+  changeRating( newRating, artist, type, i){
+    var rate = this.props.ratings.filter(function(rating){
+      return rating.ArtistId == artist.id;
+    });
+    const rating = {ArtistId: artist.id, UserId: this.state.idLogged, rating_value: newRating};
+      
+    console.log(newRating);
+    console.log(rating);
+    console.log(rate);
+    
+    /*
+    if(rate.length == 0){
+      fetch('/api/rating',{
+        method: 'POST',
+        body: JSON.stringify(rating),
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }}).then(res => res.json()).catch(error => M.toast({html:error.message, classes: 'rounded'}));   
+    }
+    else{
+      fetch('/api/rating/'+rate[0].id,{
+        method: 'PUT',
+        body: JSON.stringify(rating),
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }}).then(res => res.json()).catch(error => M.toast({html:error.message, classes: 'rounded'}));
+    }
+    */
   }
 
   componentDidMount(){
@@ -95,8 +123,8 @@ class UserSearch extends Component{
                   <center>
                     <StarRatings
                       rating={this.state.toptengenrates[i].rating_value || 0}
-                      starRatedColor="blue"
-                      changeRating={this.changeRating}
+                      starRatedColor="yellow"
+                      changeRating={() => this.changeRating(gen, 2, i)}
                       numberOfStars={5}
                       name={gen.artist_brainzmusic}
                       starDimension ="25px"
@@ -124,8 +152,8 @@ class UserSearch extends Component{
                 <center>
                   <StarRatings
                     rating={this.state.toptenminerates[i].rating_value || 0}
-                    starRatedColor="blue"
-                    changeRating={this.changeRating}
+                    starRatedColor="yellow"
+                    changeRating={() => this.changeRating(mine, 3, i)}
                     numberOfStars={5}
                     name={mine.artist_brainzmusic}
                     starDimension ="25px"
@@ -153,8 +181,8 @@ class UserSearch extends Component{
                 <center>
                   <StarRatings
                     rating={this.state.toptensearchrates[i].rating_value || 0}
-                    starRatedColor="blue"
-                    changeRating={this.changeRating}
+                    starRatedColor="yellow"
+                    changeRating={() => this.changeRating(search, 1, i)}
                     numberOfStars={5}
                     name={search.artist_brainzmusic}
                     starDimension ="25px"
