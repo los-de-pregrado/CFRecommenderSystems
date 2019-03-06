@@ -130,7 +130,7 @@ class UserSearch extends Component{
                     <StarRatings
                       rating={this.state.toptengenrates[i].rating_value || 0}
                       starRatedColor="yellow"
-                      changeRating={() => this.changeRating(gen, 2, i)}
+                      changeRating={this.changeRating}
                       numberOfStars={5}
                       name={gen.artist_brainzmusic+","+2+","+i}
                       starDimension ="25px"
@@ -159,7 +159,7 @@ class UserSearch extends Component{
                   <StarRatings
                     rating={this.state.toptenminerates[i].rating_value || 0}
                     starRatedColor="yellow"
-                    changeRating={() => this.changeRating(mine, 3, i)}
+                    changeRating={this.changeRating}
                     numberOfStars={5}
                     name={mine.artist_brainzmusic+","+3+","+i}
                     starDimension ="25px"
@@ -188,7 +188,7 @@ class UserSearch extends Component{
                   <StarRatings
                     rating={this.state.toptensearchrates[i].rating_value || 0}
                     starRatedColor="yellow"
-                    changeRating={() => this.changeRating(search, 1, i)}
+                    changeRating={this.changeRating}
                     numberOfStars={5}
                     name={search.artist_brainzmusic+","+1+","+i}
                     starDimension ="25px"
