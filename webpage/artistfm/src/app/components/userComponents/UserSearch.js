@@ -42,11 +42,12 @@ class UserSearch extends Component{
     }
     else if(value !== ''){
       fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
-        console.log(data);
+        
         this.setState({
           toptensearchrates: [],
           toptensearch: []
         }, (data) => {
+          console.log(data);
           for(artist in data){
             artist_id = data[artist].id;
             var rate = this.props.ratings.filter(function(rating){
