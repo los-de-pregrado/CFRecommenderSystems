@@ -44,7 +44,6 @@ class UserSearch extends Component{
       fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
         console.log
         this.setState({
-          toptensearch: data,
           toptensearchrates: []
         }, () =>{
           for(artist of data){
@@ -62,7 +61,10 @@ class UserSearch extends Component{
                 toptensearchrates: [...toptensearchrates,rate[0]]
               });
             }            
-          }          
+          }
+          this.setState({            
+            toptensearch: data,
+          });          
         });
       });
     }
