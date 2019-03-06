@@ -54,7 +54,7 @@ class UserSearch extends Component{
             });
             if (rate.length == 0){
               this.setState({
-                toptensearchrates: [...toptensearchrates,{"rating_value":0}]
+                toptensearchrates: [...toptensearchrates,{"id":0,"ArtistId": artist_id,"rating_value":0}]
               });
             }
             else{
@@ -97,7 +97,7 @@ class UserSearch extends Component{
                 <div className="card-action">
                   <center>
                     <StarRatings
-                      rating={this.state.toptengenrates[i].rating_value}
+                      rating={this.state.toptengenrates[i].rating_value || 0}
                       starRatedColor="blue"
                       changeRating={this.changeRating}
                       numberOfStars={5}
@@ -126,7 +126,7 @@ class UserSearch extends Component{
               <div className="card-action">
                 <center>
                   <StarRatings
-                    rating={this.state.toptenminerates[i].rating_value}
+                    rating={this.state.toptenminerates[i].rating_value || 0}
                     starRatedColor="blue"
                     changeRating={this.changeRating}
                     numberOfStars={5}
@@ -155,7 +155,7 @@ class UserSearch extends Component{
               <div className="card-action">
                 <center>
                   <StarRatings
-                    rating={this.state.toptensearchrates[i].rating_value}
+                    rating={this.state.toptensearchrates[i].rating_value || 0}
                     starRatedColor="blue"
                     changeRating={this.changeRating}
                     numberOfStars={5}
