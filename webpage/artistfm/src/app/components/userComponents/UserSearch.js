@@ -45,7 +45,7 @@ class UserSearch extends Component{
         let toptensearchlist = {};
         let toptensearchrateslist = {};
         for(let artist in data){
-          artist_id = data[artist].id;
+          let artist_id = data[artist].id;
           var rate = this.props.ratings.filter(function(rating){
             return rating.ArtistId == artist_id;
           });
