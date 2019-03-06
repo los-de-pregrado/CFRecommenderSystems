@@ -44,7 +44,9 @@ class ModelBuilder:
         df = pd.read_csv(self.file_location, delimiter=",",
                          encoding="utf-8", error_bad_lines=False, low_memory=False)
 
-        for i in range(4400, len(df)):
+        df = df
+
+        for i in range(662827,4400,-1):
             row = df.iloc[[i]]
             row_to_insert = {'user_id': self._get_user_db_id(all_users, df.iat[i, 0]),
                              'artist_id': self._get_artist_db_id(all_artists, df.iat[i, 1]),
