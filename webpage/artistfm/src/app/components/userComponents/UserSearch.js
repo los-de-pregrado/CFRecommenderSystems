@@ -42,32 +42,25 @@ class UserSearch extends Component{
     }
     else if(value !== ''){
       fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
-        
-        this.setState({
-          toptensearchrates: [],
-          toptensearch: []
-        }, (data) => {
-          console.log(data);
-          for(artist in data){
-            artist_id = data[artist].id;
-            var rate = this.props.ratings.filter(function(rating){
-              return rating.ArtistId == artist_id;
-            });
-            if (rate.length == 0){
-              this.setState({
-                toptensearchrates: [...toptensearchrates,{"id":0,"ArtistId": artist_id,"rating_value":0}]
-              });
-            }
-            else{
-              this.setState({
-                toptensearchrates: [...toptensearchrates,rate[0]]
-              });
-            }            
+        let toptensearchlist = {};
+        let toptensearchrateslist = {};
+        for(artist in data){
+          artist_id = data[artist].id;
+          var rate = this.props.ratings.filter(function(rating){
+            return rating.ArtistId == artist_id;
+          });
+          if (rate.length == 0){
+            toptensearchrateslist.push({"id":0,"ArtistId": artist_id,"rating_value":0});
           }
-          this.setState({            
-            toptensearch: data
-          });          
-        });
+          else{
+            toptensearchrateslist.push(rate[0]);
+          }
+          toptensearchlist.push(data[artist]);         
+        }
+        this.setState({            
+          toptensearch:toptensearchlist,
+          toptensearchrates: toptensearchrateslist
+        });        
       });
     }
     else{
