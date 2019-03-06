@@ -76,32 +76,30 @@ class UserSearch extends Component{
     name = data[0];
     let type = Number(data[1]);
     let i = Number(data[2]);
-    let artist_id = Number(data[3]);
-    var rate = this.props.ratings.filter(function(rating){
-      return rating.artist_brainzmusic == name;
-    });
-    const rating = {ArtistId: artist_id, UserId: this.state.idLogged, rating_value: newRating};
+    let artistid = Number(data[3]);
+
+    const rating = {artist_id: artistid, user_id: this.state.idLogged, rating_value: newRating};    
     
-    
-    if(rate.length == 0){
-      fetch('/api/rating',{
-        method: 'POST',
-        body: JSON.stringify(rating),
-        headers:{
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }}).then(res => res.json()).catch(error => M.toast({html:error.message, classes: 'rounded'}));   
-    }
-    else{
-      fetch('/api/rating/'+rate[0].id,{
-        method: 'PUT',
-        body: JSON.stringify(rating),
-        headers:{
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }}).then(res => res.json()).catch(error => M.toast({html:error.message, classes: 'rounded'}));
-    }
-    
+    fetch('/api/rating',{
+      method: 'POST',
+      body: JSON.stringify(rating),
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }}).then(res => {
+        if(!res.ok){
+          fetch('/api/rating/byboth/'+rating.user_id+"/"+rating.artist_id).then(res=>res.json()).then(data =>{
+            let ratingid = data[0].id;
+            fetch('/api/rating/'+ratingid,{
+              method: 'PUT',
+              body: JSON.stringify(rating),
+              headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }}).then(res => res.json()).catch(error => M.toast({html:error.message, classes: 'rounded'}));
+          });         
+        }
+      }).catch(error => M.toast({html:error.message, classes: 'rounded'}));        
 
     if(type == 1){
       let lista =this.state.toptensearchrates;

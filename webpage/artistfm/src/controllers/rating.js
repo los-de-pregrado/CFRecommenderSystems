@@ -19,6 +19,18 @@ module.exports = {
         }).then((ratings) => res.status(200).send(ratings))
         .catch((error) => res.status(400).send(error));
     },
+    get(req,res){
+        return Rating.findAll({
+            where:{ArtistId:req.params.artist_id, UserId: req.params.user_id}
+        }).then((ratings) => {
+            if(ratings.length == 0){
+                return res.status(404).send({
+                    message: 'Rating not found',
+                });
+            }
+            res.status(200).send(ratings);
+        }).catch((error) => res.status(400).send(error));
+    },
     post(req,res){
         return Rating.findAll({
             where:{ArtistId:req.body.artist_id, UserId: req.body.user_id}
