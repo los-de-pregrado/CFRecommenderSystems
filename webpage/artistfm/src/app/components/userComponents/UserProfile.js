@@ -19,7 +19,7 @@ class UserProfile extends Component{
   
   componentDidMount(){
     document.dispatchEvent(new Event('component'));
-    fetch('api/ratings/byuser/'+this.state.idLogged).then(res=>res.json()).then(data=>{
+    fetch('api/rating/byuser/'+this.state.idLogged).then(res=>res.json()).then(data=>{
       this.props.getRatings(data);
     })
   }
