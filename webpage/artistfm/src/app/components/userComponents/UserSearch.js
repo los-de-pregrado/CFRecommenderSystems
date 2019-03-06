@@ -71,10 +71,8 @@ class UserSearch extends Component{
   }
 
   changeRating(newRating, name){
-    console.log(newRating);
-    console.log(name);
+
     let data = name.split(",");
-    console.log(data);
     name = data[0];
     let type = Number(data[1]);
     let i = Number(data[2]);
@@ -83,11 +81,8 @@ class UserSearch extends Component{
       return rating.artist_brainzmusic == name;
     });
     const rating = {ArtistId: artist_id, UserId: this.state.idLogged, rating_value: newRating};
-      
-    console.log(rating);
-    console.log(rate);
     
-    /*
+    
     if(rate.length == 0){
       fetch('/api/rating',{
         method: 'POST',
@@ -106,7 +101,7 @@ class UserSearch extends Component{
           'Content-Type': 'application/json'
         }}).then(res => res.json()).catch(error => M.toast({html:error.message, classes: 'rounded'}));
     }
-    */
+    
 
     if(type == 1){
       let lista =this.state.toptensearchrates;
