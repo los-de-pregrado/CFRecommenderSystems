@@ -1,13 +1,9 @@
 import json
 import time
 
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import requests
-from six import iteritems
-from surprise import SVD, AlgoBase, Dataset, Reader, accuracy
-from surprise.model_selection import train_test_split
+from surprise import Dataset, Reader
 
 from models import KNNBasic
 
@@ -44,14 +40,19 @@ class ModelBuilder:
         df = pd.read_csv(self.file_location, delimiter=",",
                          encoding="utf-8", error_bad_lines=False, low_memory=False)
 
+<<<<<<< HEAD
         df = df
 
         for i in range(662827,4400,-1):
+=======
+        for i in range(294590, 0, -1):
+>>>>>>> eab8694020443410912cff4842ca4682330c7be7
             row = df.iloc[[i]]
             row_to_insert = {'user_id': self._get_user_db_id(all_users, df.iat[i, 0]),
                              'artist_id': self._get_artist_db_id(all_artists, df.iat[i, 1]),
                              'rating_value': df.iat[i, 2]}
-            r = requests.post("http://172.24.101.30:8082/api/rating", json=row_to_insert)
+            r = requests.post(
+                "http://172.24.101.30:8082/api/rating", json=row_to_insert)
             if r.status_code < 300 and i % 1000 == 0:
                 print(i/len(df)*100)
             elif r.status_code < 300:
