@@ -70,13 +70,19 @@ class UserSearch extends Component{
     }
   }
 
-  changeRating( newRating, artist, type, i){
+  changeRating(newRating, name){
+    console.log(newRating);
+    console.log(name);
+    data = name.split(",");
+    console.log(data);
+    name = data[0];
+    type = Number(data[1]);
+    i = Number(data[2]);
     var rate = this.props.ratings.filter(function(rating){
-      return rating.ArtistId == artist.id;
+      return rating.artist_brainzmusic == name;
     });
     const rating = {ArtistId: artist.id, UserId: this.state.idLogged, rating_value: newRating};
       
-    console.log(newRating);
     console.log(rating);
     console.log(rate);
     
@@ -126,7 +132,7 @@ class UserSearch extends Component{
                       starRatedColor="yellow"
                       changeRating={() => this.changeRating(gen, 2, i)}
                       numberOfStars={5}
-                      name={gen.artist_brainzmusic}
+                      name={gen.artist_brainzmusic+","+2+","+i}
                       starDimension ="25px"
                     />
                   </center>
@@ -155,7 +161,7 @@ class UserSearch extends Component{
                     starRatedColor="yellow"
                     changeRating={() => this.changeRating(mine, 3, i)}
                     numberOfStars={5}
-                    name={mine.artist_brainzmusic}
+                    name={mine.artist_brainzmusic+","+3+","+i}
                     starDimension ="25px"
                   />
                 </center>
@@ -184,7 +190,7 @@ class UserSearch extends Component{
                     starRatedColor="yellow"
                     changeRating={() => this.changeRating(search, 1, i)}
                     numberOfStars={5}
-                    name={search.artist_brainzmusic}
+                    name={search.artist_brainzmusic+","+1+","+i}
                     starDimension ="25px"
                   />
                 </center>
