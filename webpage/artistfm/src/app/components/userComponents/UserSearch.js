@@ -139,7 +139,9 @@ class UserSearch extends Component{
               </div>
               <div className="card-stacked">
                 <div className="card-content valign-wrapper">
-                  <font size="5"><b><p className ="center-align">{gen.artist_name}</p></b></font>
+                  <div className = "row">
+                    <font size="5"><b><p className ="center-align">{gen.artist_name}</p></b></font>
+                  </div>
                 </div>
                 <div className="card-action">
                   <center>
@@ -168,7 +170,9 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content valign-wrapper">
-              <font size="5"><b><p className ="center-align">{mine.artist_name}</p></b></font>
+                <div className = "row">
+                  <font size="5"><b><p className ="center-align">{mine.artist_name}</p></b></font>
+                </div>
               </div>
               <div className="card-action">
                 <center>
@@ -197,7 +201,9 @@ class UserSearch extends Component{
             </div>
             <div className="card-stacked">
               <div className="card-content valign-wrapper">
-                <font size="5"><b><p className ="center-align">{search.artist_name}</p></b></font>
+                <div className = "row">
+                  <font size="5"><b><p className ="center-align">{search.artist_name}</p></b></font>
+                </div>
               </div>
               <div className="card-action">
                 <center>
