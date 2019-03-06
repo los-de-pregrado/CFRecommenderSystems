@@ -97,7 +97,9 @@ class App extends Component{
   }
 
   getRatingsLogged(data){
-
+    this.setState({
+      ratings: data
+    });
   }
 
   render(){   

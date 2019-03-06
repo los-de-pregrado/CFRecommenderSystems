@@ -21,6 +21,7 @@ class UserSearch extends Component{
     this.handleChange = this.handleChange.bind(this);
 
     this.actualizar();
+    console.log(this.props.ratings);
   }
 
   actualizar(){
