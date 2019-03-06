@@ -42,8 +42,8 @@ class UserSearch extends Component{
     }
     else if(value !== ''){
       fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
-        let toptensearchlist = {};
-        let toptensearchrateslist = {};
+        let toptensearchlist = [];
+        let toptensearchrateslist = [];
         for(let artist in data){
           let artist_id = data[artist].id;
           var rate = this.props.ratings.filter(function(rating){
