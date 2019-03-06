@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import dateFormat from 'dateformat';
-import DataFrame from "dataframe-js";
 
 class UserProfile extends Component{
 

@@ -21,7 +21,7 @@ class UserSearch extends Component{
     this.handleChange = this.handleChange.bind(this);
 
     this.actualizar();
-    console.log(this.props.ratings);
+    
   }
 
   actualizar(){
@@ -44,7 +44,18 @@ class UserSearch extends Component{
       fetch('/api/artist/search/'+value.trim()).then(res=>res.json()).then(data =>{
         console.log
         this.setState({
-          toptensearch: data
+          toptensearch: data,
+          toptensearchrates: []
+        }, () =>{
+          for(artist of data){
+            artist_id = artist.id;
+            var rate = this.props.ratings.filter(function(rating){
+              return rating.ArtistId == artist_id;
+            });
+            this.setState({
+              toptensearchrates: [...toptensearchrates,rate[0]]
+            });
+          }          
         });
       });
     }
@@ -79,7 +90,7 @@ class UserSearch extends Component{
                 <div className="card-action">
                   <center>
                     <StarRatings
-                      rating={this.state.toptengenrates[i]}
+                      rating={this.state.toptengenrates[i].rating_value}
                       starRatedColor="blue"
                       changeRating={this.changeRating}
                       numberOfStars={5}
@@ -108,7 +119,7 @@ class UserSearch extends Component{
               <div className="card-action">
                 <center>
                   <StarRatings
-                    rating={this.state.toptenminerates[i]}
+                    rating={this.state.toptenminerates[i].rating_value}
                     starRatedColor="blue"
                     changeRating={this.changeRating}
                     numberOfStars={5}
@@ -137,7 +148,7 @@ class UserSearch extends Component{
               <div className="card-action">
                 <center>
                   <StarRatings
-                    rating={this.state.toptensearchrates[i]}
+                    rating={this.state.toptensearchrates[i].rating_value}
                     starRatedColor="blue"
                     changeRating={this.changeRating}
                     numberOfStars={5}
