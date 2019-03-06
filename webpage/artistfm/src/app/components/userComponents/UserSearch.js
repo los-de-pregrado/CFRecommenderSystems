@@ -78,10 +78,11 @@ class UserSearch extends Component{
     name = data[0];
     let type = Number(data[1]);
     let i = Number(data[2]);
+    let artist_id = Number(data[3]);
     var rate = this.props.ratings.filter(function(rating){
       return rating.artist_brainzmusic == name;
     });
-    const rating = {ArtistId: artist.id, UserId: this.state.idLogged, rating_value: newRating};
+    const rating = {ArtistId: artist_id, UserId: this.state.idLogged, rating_value: newRating};
       
     console.log(rating);
     console.log(rate);
@@ -154,7 +155,7 @@ class UserSearch extends Component{
                       starRatedColor="yellow"
                       changeRating={this.changeRating}
                       numberOfStars={5}
-                      name={gen.artist_musicbrainz+","+2+","+i}
+                      name={gen.artist_musicbrainz+","+2+","+i+","+gen.id}
                       starDimension ="25px"
                     />
                   </center>
@@ -183,7 +184,7 @@ class UserSearch extends Component{
                     starRatedColor="yellow"
                     changeRating={this.changeRating}
                     numberOfStars={5}
-                    name={mine.artist_musicbrainz+","+3+","+i}
+                    name={mine.artist_musicbrainz+","+3+","+i+","+mine.id}
                     starDimension ="25px"
                   />
                 </center>
@@ -212,7 +213,7 @@ class UserSearch extends Component{
                     starRatedColor="yellow"
                     changeRating={this.changeRating}
                     numberOfStars={5}
-                    name={search.artist_musicbrainz+","+1+","+i}
+                    name={search.artist_musicbrainz+","+1+","+i+","+search.id}
                     starDimension ="25px"
                   />
                 </center>
