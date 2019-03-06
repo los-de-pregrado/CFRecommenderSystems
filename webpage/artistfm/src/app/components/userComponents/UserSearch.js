@@ -73,11 +73,11 @@ class UserSearch extends Component{
   changeRating(newRating, name){
     console.log(newRating);
     console.log(name);
-    data = name.split(",");
+    let data = name.split(",");
     console.log(data);
     name = data[0];
-    type = Number(data[1]);
-    i = Number(data[2]);
+    let type = Number(data[1]);
+    let i = Number(data[2]);
     var rate = this.props.ratings.filter(function(rating){
       return rating.artist_brainzmusic == name;
     });
@@ -106,6 +106,28 @@ class UserSearch extends Component{
         }}).then(res => res.json()).catch(error => M.toast({html:error.message, classes: 'rounded'}));
     }
     */
+
+    if(type == 1){
+      let lista = {...this.state.toptensearchrates};
+      lista[i]=rating;
+      this.setState({
+        toptensearchrates: lista
+      });
+    }
+    else if(type == 2){
+      let lista = {...this.state.toptengenrates};
+      lista[i]=rating;
+      this.setState({
+        toptengenrates: lista
+      });
+    }
+    else{
+      let lista = {...this.state.toptenminerates};
+      lista[i]=rating;
+      this.setState({
+        toptenminerates: lista
+      });
+    }
   }
 
   componentDidMount(){
@@ -132,7 +154,7 @@ class UserSearch extends Component{
                       starRatedColor="yellow"
                       changeRating={this.changeRating}
                       numberOfStars={5}
-                      name={gen.artist_brainzmusic+","+2+","+i}
+                      name={gen.artist_musicbrainz+","+2+","+i}
                       starDimension ="25px"
                     />
                   </center>
@@ -161,7 +183,7 @@ class UserSearch extends Component{
                     starRatedColor="yellow"
                     changeRating={this.changeRating}
                     numberOfStars={5}
-                    name={mine.artist_brainzmusic+","+3+","+i}
+                    name={mine.artist_musicbrainz+","+3+","+i}
                     starDimension ="25px"
                   />
                 </center>
@@ -190,7 +212,7 @@ class UserSearch extends Component{
                     starRatedColor="yellow"
                     changeRating={this.changeRating}
                     numberOfStars={5}
-                    name={search.artist_brainzmusic+","+1+","+i}
+                    name={search.artist_musicbrainz+","+1+","+i}
                     starDimension ="25px"
                   />
                 </center>
