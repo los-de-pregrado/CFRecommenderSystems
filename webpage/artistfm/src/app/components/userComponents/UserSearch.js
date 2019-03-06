@@ -52,9 +52,16 @@ class UserSearch extends Component{
             var rate = this.props.ratings.filter(function(rating){
               return rating.ArtistId == artist_id;
             });
-            this.setState({
-              toptensearchrates: [...toptensearchrates,rate[0]]
-            });
+            if (rate.length == 0){
+              this.setState({
+                toptensearchrates: [...toptensearchrates,{"rating_value":0}]
+              });
+            }
+            else{
+              this.setState({
+                toptensearchrates: [...toptensearchrates,rate[0]]
+              });
+            }            
           }          
         });
       });
