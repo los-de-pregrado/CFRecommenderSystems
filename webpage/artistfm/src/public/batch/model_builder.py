@@ -11,7 +11,7 @@ from models import KNNBasic
 
 class ModelBuilder:
     file_location = "../../../../../preprocessing/list.csv"
-    dataset_columns = ['userId', 'artistId', 'rating']
+    dataset_columns = ['UserId', 'ArtistId', 'rating_value']
     k_value = 40
     gamma = 15
     full_trainset = None
