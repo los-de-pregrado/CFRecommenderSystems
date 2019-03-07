@@ -2,3 +2,6 @@ surprise
 numpy
 pandas
 matplotlib
+flask
+flask-restful
+scripy

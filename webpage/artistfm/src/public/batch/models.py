@@ -87,7 +87,8 @@ class KNNBasic(SymmetricAlgo):
     def fit(self, trainset):
 
         SymmetricAlgo.fit(self, trainset)
-        self.sim = self.compute_similarities(verbose=self.verbose)
+        sim_temp = self.compute_similarities(verbose=self.verbose)
+        self.sim = sim_temp
 
         return self
 
@@ -98,7 +99,7 @@ class KNNBasic(SymmetricAlgo):
 
         x, y = self.switch(u, i)
 
-        neighbors = [(self.sim[x, x2], r) for (x2, r) in self.yr[y] if self.sim[x, x2] > self.threshold]
+        neighbors = [(self.sim[x, x2], r) for (x2, r) in self.yr[y]]
         k_neighbors = heapq.nlargest(self.k, neighbors, key=lambda t: t[0])
 
         # compute weighted average
