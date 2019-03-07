@@ -34,5 +34,5 @@ class Ranking(Resource):
 api.add_resource(Prediction, "/predict/<int:uid>")
 api.add_resource(Model, "/model")
 api.add_resource(Ranking, "/ranking")
-app.run(host='127.0.0.1', port=8081, debug=False)
+app.run(host='0.0.0.0', port=8081, debug=False)
     
