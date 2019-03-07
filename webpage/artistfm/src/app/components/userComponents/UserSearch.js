@@ -4,35 +4,14 @@ import StarRatings from 'react-star-ratings';
 class UserSearch extends Component{
 
   constructor(props){
-    super(props);    
-    this.state={
-        idLogged : this.props.idLogged,
-        user:{},
-        toptengen: [],
-        toptenmine: [],
-        toptensearch: [],
-        toptengenrates: [],
-        toptenminerates: [],
-        toptensearchrates: []
-    }
+    super(props);
     
-    this.actualizar = this.actualizar.bind(this);
-    this.changeRating = this.changeRating.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-
-    this.actualizar();
-    
-  }
-
-  actualizar(){
-    fetch('/api/user/'+this.state.idLogged).then(res => res.json()).then(data => {       
-            this.setState({
-                user:data
-            });         
-      });
-
     let toptengenlist = [];
     let toptengenrateslist = [];
+
+    console.log(this.props.ranking);
+    console.log(this.props.myranking);
+
     for(let artist of this.props.ranking){
       let artist_id = artist;
       var rate = this.props.ratings.filter(function(rating){
@@ -48,10 +27,6 @@ class UserSearch extends Component{
         toptengenlist.push(data);            
       });          
     }
-    this.setState({
-      toptengen:toptengenlist,
-      toptengenrates: toptengenrateslist
-    });
 
     let toptenminelist = [];
     let toptenminerateslist = [];
@@ -70,10 +45,34 @@ class UserSearch extends Component{
           toptenminelist.push(data);         
         });              
     }
-    this.setState({
-      toptenmine:toptenminelist,
-      toptenminerates: toptenminerateslist
-    });
+
+    this.state={
+        idLogged : this.props.idLogged,
+        user:{},
+        toptengen: toptengenlist,
+        toptenmine: toptenminelist,
+        toptensearch: [],
+        toptengenrates: [],
+        toptenminerates: toptenminelist,
+        toptensearchrates: toptenminerateslist
+    }
+    
+    this.actualizar = this.actualizar.bind(this);
+    this.changeRating = this.changeRating.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
+    this.actualizar();
+
+    
+    
+  }
+
+  actualizar(){
+    fetch('/api/user/'+this.state.idLogged).then(res => res.json()).then(data => {       
+            this.setState({
+                user:data
+            });         
+      });    
   }
   
   handleChange(e){
