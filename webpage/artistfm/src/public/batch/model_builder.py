@@ -42,7 +42,9 @@ class ModelBuilder:
         # r = requests.get("http://172.24.101.30:8082/api/rating")
 
         data = r.json()
-        df = pd.concat([pd.DataFrame(x) for x in data], ignore_index=False)
+        dataset_columns = ['UserId', 'ArtistId', 'rating_value']
+        df = pd.concat([pd.DataFrame(
+            {'UserId': x['UserId'], 'ArtistId': x['ArtistId'], 'rating_value': x['rating_value']}) for x in data], ignore_index=False)
 
         # df = pd.read_csv(self.file_location, delimiter=",",
         #                  encoding="utf-8", error_bad_lines=False, low_memory=False)
