@@ -305,7 +305,7 @@ class UserSearch extends Component{
             <center><h5>Por usuarios parecidos a ti</h5></center>
             <br></br>
             {
-              this.props.ratings.length == 0?
+              this.props.ratings.length>0?
               <div>
                 {mines}
               </div>
