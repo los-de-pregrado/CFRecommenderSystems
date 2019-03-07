@@ -61,10 +61,7 @@ class UserSearch extends Component{
     this.changeRating = this.changeRating.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-    this.actualizar();
-
-    
-    
+    this.actualizar();   
   }
 
   actualizar(){
@@ -165,6 +162,10 @@ class UserSearch extends Component{
         toptenminerates: lista
       });
     }
+
+    fetch('http://172.24.101.30:8081/model'+this.state.idLogged).then(res=>res.json()).then(data=>{
+      console.log("Nuevo modelo corriendo");
+    });
   }
 
   componentDidMount(){
