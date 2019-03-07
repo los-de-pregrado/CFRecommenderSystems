@@ -22,11 +22,11 @@ class UserProfile extends Component{
       this.props.getRatings(data);
     });
 
-    fetch('http://127.0.0.1:5000/ranking').then(res=>res.json()).then(data=>{
+    fetch('http://127.0.0.1:8081/ranking').then(res=>res.json()).then(data=>{
       this.props.getRanking(data);
     });
 
-    fetch('http://127.0.0.1:5000/predict/'+this.state.idLogged).then(res=>res.json()).then(data=>{
+    fetch('http://127.0.0.1:8081/predict/'+this.state.idLogged).then(res=>res.json()).then(data=>{
       this.props.getPredictions(data);
     });
   }
