@@ -19,7 +19,9 @@ class App extends Component{
       idIniciado: 0,
       nombreIniciado: '',
       onSearch: false,
-      ratings: []
+      ratings: [],
+      ranking: [],
+      predictions: []
     }    
     this.toLogin = this.toLogin.bind(this);
     this.toSignUp = this.toSignUp.bind(this);
@@ -85,7 +87,9 @@ class App extends Component{
       idIniciado: 0,
       nombreIniciado : 0,
       onSearch : false,
-      ratings: []
+      ratings: [],
+      ranking: [],
+      predictions: []
     });
     M.toast({html:'Sesión cerrada', classes: 'rounded'});
   }
@@ -99,6 +103,18 @@ class App extends Component{
   getRatingsLogged(data){
     this.setState({
       ratings: data
+    });
+  }
+
+  getRanking(data){
+    this.setState({
+      ranking: data
+    });
+  }
+
+  getPredictionsLogged(data){
+    this.setState({
+      predictions: data
     });
   }
 
@@ -180,11 +196,11 @@ class App extends Component{
           :this.state.iniciado?
             this.state.onSearch?
             <div>
-              <UserSearch idLogged = {this.state.idIniciado} ratings = {this.state.ratings}/>   
+              <UserSearch idLogged = {this.state.idIniciado} ratings = {this.state.ratings} ranking = {this.state.ranking} myranking = {this.state.predictions}/>   
             </div> 
             :
             <div>
-              <UserProfile idLogged = {this.state.idIniciado} getRatings = {this.getRatingsLogged}/>   
+              <UserProfile idLogged = {this.state.idIniciado} getRatings = {this.getRatingsLogged} getRanking = {this.getRanking} getPredictions = {this.getPredictionsLogged}/>   
             </div>
           :
           <div>

@@ -30,6 +30,46 @@ class UserSearch extends Component{
                 user:data
             });         
       });
+
+    let toptengenlist = [];
+    let toptengenrateslist = [];
+    for(let artist of this.props.ranking){
+      let artist_id = artist.id;
+      var rate = this.props.ratings.filter(function(rating){
+        return rating.ArtistId == artist_id;
+      });
+      if (rate.length == 0){
+        toptengenrateslist.push({"id":0,"ArtistId": artist_id,"rating_value":0});
+      }
+      else{
+        toptengenrateslist.push(rate[0]);
+      }
+      toptengenlist.push(artist);         
+    }
+    this.setState({
+      toptengen:toptensearchlist,
+      toptengenrates: toptensearchrateslist
+    });
+
+    let toptenminelist = [];
+    let toptenminerateslist = [];
+    for(let artist of this.props.myranking){
+      let artist_id = artist.id;
+      var rate = this.props.ratings.filter(function(rating){
+        return rating.ArtistId == artist_id;
+      });
+      if (rate.length == 0){
+        toptenminerateslist.push({"id":0,"ArtistId": artist_id,"rating_value":0});
+      }
+      else{
+        toptenminerateslist.push(rate[0]);
+      }
+      toptenminelist.push(artist);         
+    }
+    this.setState({
+      toptenmine:toptensearchlist,
+      toptenminerates: toptensearchrateslist
+    });
   }
   
   handleChange(e){
@@ -253,10 +293,23 @@ class UserSearch extends Component{
 
           <div className = "col s4">
             <center><h5>Los más gustados</h5></center>
+            <br></br>
+            {gens}
           </div>
 
           <div className = "col s4">
             <center><h5>Por usuarios parecidos a ti</h5></center>
+            <br></br>
+            {
+              this.props.ratins.length == 0?
+              <div>
+                {mines}
+              </div>
+              :
+              <div>
+                <center><h6>No has calificado ningún artista, aún no sabemos cuáles son tus gustos.</h6></center>
+              </div>
+            }
           </div>  
         
         </div>
