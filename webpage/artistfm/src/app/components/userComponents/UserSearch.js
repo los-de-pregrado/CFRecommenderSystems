@@ -47,8 +47,8 @@ class UserSearch extends Component{
       toptengenlist.push(artist);         
     }
     this.setState({
-      toptengen:toptensearchlist,
-      toptengenrates: toptensearchrateslist
+      toptengen:toptengenlist,
+      toptengenrates: toptengenrateslist
     });
 
     let toptenminelist = [];
@@ -67,8 +67,8 @@ class UserSearch extends Component{
       toptenminelist.push(artist);         
     }
     this.setState({
-      toptenmine:toptensearchlist,
-      toptenminerates: toptensearchrateslist
+      toptenmine:toptenminelist,
+      toptenminerates: toptenminerateslist
     });
   }
   
