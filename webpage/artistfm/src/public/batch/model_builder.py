@@ -38,7 +38,7 @@ class ModelBuilder:
         self.to_update = True
 
     def build_trainset(self):
-        r = requests.get("http://127.0.0.1:8082/api/ratings")
+        r = requests.get("http://127.0.0.1:8082/api/rating")
         # r = requests.get("http://172.24.101.30:8082/api/rating")
 
         data = r.json()
