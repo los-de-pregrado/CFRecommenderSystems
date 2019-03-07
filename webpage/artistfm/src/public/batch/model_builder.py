@@ -39,18 +39,14 @@ class ModelBuilder:
     def build_trainset(self):
         # r = requests.get("http://127.0.0.1:8082/api/rating")
         r = requests.get("http://172.24.101.30:8082/api/rating")
-        print(r)
         data = r.json()
         df = pd.DataFrame(data)
-        print(df)
         df = df[['UserId', 'ArtistId', 'rating_value']]
-        print(df)
 
         reader = Reader(rating_scale=(1.0, 5.0))
         data = Dataset.load_from_df(df[self.dataset_columns], reader)
         full_trainset_temp = data.build_full_trainset()
         self.full_trainset = full_trainset_temp
-        print(self.full_trainset)
 
     def create_model(self):
         # Create the algorithm
@@ -79,8 +75,6 @@ class ModelBuilder:
         Returns all predicitions for the given user
         """
         print("Getting recomendations for user {}".format(user_id))
-        print(self.full_trainset.ur)
-        print(self.full_trainset.ir)
 
         user_ratings = self.full_trainset.ur[self.full_trainset.to_inner_uid(
             user_id)]
