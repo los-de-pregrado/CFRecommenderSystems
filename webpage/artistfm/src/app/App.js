@@ -31,6 +31,8 @@ class App extends Component{
     this.toProfile = this.toProfile.bind(this);
     this.toSearch = this.toSearch.bind(this);
     this.getRatingsLogged= this.getRatingsLogged.bind(this);
+    this.getPredictionsLogged = this.getPredictionsLogged.bind(this);
+    this.getRanking = this.getRanking.bind(this);
   }
 
   toLogin(){

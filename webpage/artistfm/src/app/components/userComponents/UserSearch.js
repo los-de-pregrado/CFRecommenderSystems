@@ -34,7 +34,7 @@ class UserSearch extends Component{
     let toptengenlist = [];
     let toptengenrateslist = [];
     for(let artist of this.props.ranking){
-      let artist_id = artist.id;
+      let artist_id = artist;
       var rate = this.props.ratings.filter(function(rating){
         return rating.ArtistId == artist_id;
       });
@@ -44,17 +44,19 @@ class UserSearch extends Component{
       else{
         toptengenrateslist.push(rate[0]);
       }
-      toptengenlist.push(artist);         
+      fetch('/api/artist/'+artist_id).then(res => res.json()).then(data => {       
+        toptengenlist.push(data);            
+      });          
     }
     this.setState({
-      toptengen:toptensearchlist,
-      toptengenrates: toptensearchrateslist
+      toptengen:toptengenlist,
+      toptengenrates: toptengenrateslist
     });
 
     let toptenminelist = [];
     let toptenminerateslist = [];
     for(let artist of this.props.myranking){
-      let artist_id = artist.id;
+      let artist_id = artist;
       var rate = this.props.ratings.filter(function(rating){
         return rating.ArtistId == artist_id;
       });
@@ -64,11 +66,13 @@ class UserSearch extends Component{
       else{
         toptenminerateslist.push(rate[0]);
       }
-      toptenminelist.push(artist);         
+      fetch('/api/artist/'+artist_id).then(res => res.json()).then(data => {       
+          toptenminelist.push(data);         
+        });              
     }
     this.setState({
-      toptenmine:toptensearchlist,
-      toptenminerates: toptensearchrateslist
+      toptenmine:toptenminelist,
+      toptenminerates: toptenminerateslist
     });
   }
   
@@ -301,7 +305,7 @@ class UserSearch extends Component{
             <center><h5>Por usuarios parecidos a ti</h5></center>
             <br></br>
             {
-              this.props.ratins.length == 0?
+              this.props.ratings.length == 0?
               <div>
                 {mines}
               </div>
