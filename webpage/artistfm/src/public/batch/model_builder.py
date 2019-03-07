@@ -10,7 +10,6 @@ from models import KNNBasic
 
 
 class ModelBuilder:
-    file_location = "../../../../../preprocessing/list.csv"
     dataset_columns = ['UserId', 'ArtistId', 'rating_value']
     k_value = 40
     gamma = 15
@@ -38,21 +37,20 @@ class ModelBuilder:
         self.to_update = True
 
     def build_trainset(self):
-        r = requests.get("http://127.0.0.1:8082/api/rating")
-        # r = requests.get("http://172.24.101.30:8082/api/rating")
-
+        # r = requests.get("http://127.0.0.1:8082/api/rating")
+        r = requests.get("http://172.24.101.30:8082/api/rating")
+        print(r)
         data = r.json()
-        dataset_columns = ['UserId', 'ArtistId', 'rating_value']
-        df = pd.concat([pd.DataFrame(
-            {'UserId': x['UserId'], 'ArtistId': x['ArtistId'], 'rating_value': x['rating_value']}) for x in data], ignore_index=False)
-
-        # df = pd.read_csv(self.file_location, delimiter=",",
-        #                  encoding="utf-8", error_bad_lines=False, low_memory=False)
+        df = pd.DataFrame(data)
+        print(df)
+        df = df[['UserId', 'ArtistId', 'rating_value']]
+        print(df)
 
         reader = Reader(rating_scale=(1.0, 5.0))
         data = Dataset.load_from_df(df[self.dataset_columns], reader)
         full_trainset_temp = data.build_full_trainset()
         self.full_trainset = full_trainset_temp
+        print(self.full_trainset)
 
     def create_model(self):
         # Create the algorithm
@@ -81,6 +79,8 @@ class ModelBuilder:
         Returns all predicitions for the given user
         """
         print("Getting recomendations for user {}".format(user_id))
+        print(self.full_trainset.ur)
+        print(self.full_trainset.ir)
 
         user_ratings = self.full_trainset.ur[self.full_trainset.to_inner_uid(
             user_id)]

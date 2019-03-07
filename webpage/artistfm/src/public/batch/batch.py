@@ -26,8 +26,8 @@ class Ranking(Resource):
         global model_builder
         return model_builder.ranking(), 200
 
-api.add_resource(Prediction, "/predict/<string:uid>")
+api.add_resource(Prediction, "/predict/<int:uid>")
 api.add_resource(Model, "/model")
 api.add_resource(Ranking, "/ranking")
-app.run(debug=False)
+app.run(host='0.0.0.0', port=8081, debug=False)
     
