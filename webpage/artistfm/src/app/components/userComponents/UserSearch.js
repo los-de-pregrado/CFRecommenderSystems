@@ -52,9 +52,9 @@ class UserSearch extends Component{
         toptengen: toptengenlist,
         toptenmine: toptenminelist,
         toptensearch: [],
-        toptengenrates: [],
-        toptenminerates: toptenminelist,
-        toptensearchrates: toptenminerateslist
+        toptengenrates: toptengenrateslist,
+        toptenminerates: toptenminerateslist,
+        toptensearchrates: []
     }
     
     this.actualizar = this.actualizar.bind(this);
