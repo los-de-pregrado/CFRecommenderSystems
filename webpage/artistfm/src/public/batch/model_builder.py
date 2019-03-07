@@ -102,7 +102,6 @@ class ModelBuilder:
         for item_id, rating in user_ratings:
             item_raw_id = self.full_trainset.to_raw_iid(item_id)
             if item_raw_id in predicted_items:
-                print('si esta guao')
                 predicted_items.remove(item_raw_id)
 
         # Return only 10 items
