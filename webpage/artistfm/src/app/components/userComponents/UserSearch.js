@@ -163,7 +163,7 @@ class UserSearch extends Component{
       });
     }
 
-    fetch('http://172.24.101.30:8081/model'+this.state.idLogged).then(res=>res.json()).then(data=>{
+    fetch('http://172.24.101.30:8081/model').then(res=>res.json()).then(data=>{
       console.log("Nuevo modelo corriendo");
     });
   }
