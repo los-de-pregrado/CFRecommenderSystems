@@ -46,6 +46,14 @@ class UserSearch extends Component{
         });              
     }
 
+    let artistaslist = []
+
+    for(let rate of this.props.ratings){
+      fetch('/api/artist/'+rate.ArtistId).then(res=>res.json()).then(data =>{
+        artistaslist.push(data); 
+      });
+    }
+
     this.state={
         idLogged : this.props.idLogged,
         user:{},
@@ -54,7 +62,9 @@ class UserSearch extends Component{
         toptensearch: [],
         toptengenrates: toptengenrateslist,
         toptenminerates: toptenminerateslist,
-        toptensearchrates: []
+        toptensearchrates: [],
+        artistasrateados: artistaslist,
+        artistarrateadosrates: this.props.ratings
     }
     
     this.actualizar = this.actualizar.bind(this);
@@ -64,12 +74,12 @@ class UserSearch extends Component{
     this.actualizar();   
   }
 
-  actualizar(){
+  actualizar(){    
     fetch('/api/user/'+this.state.idLogged).then(res => res.json()).then(data => {       
             this.setState({
                 user:data
-            });         
-      });    
+            });   
+      });  
   }
   
   handleChange(e){
@@ -171,6 +181,37 @@ class UserSearch extends Component{
   }
 
   render(){
+
+    const histos = this.state.artistasrateados.map((histo,i)=>{
+      return(
+        <div className="col s12" key = {histo.artist_musicbrainz}>
+          <div className="card horizontal">
+            <div className="card-image">
+              <img src={histo.artist_image}/>
+            </div>
+            <div className="card-stacked">
+              <div className="card-content valign-wrapper">
+                <div className = "row">
+                  <font size="5"><b><p className ="center-align">{histo.artist_name}</p></b></font>
+                </div>
+              </div>
+              <div className="card-action">
+                <center>
+                  <StarRatings
+                    rating={this.state.artistarrateadosrates[i].rating_value || 0}
+                    starRatedColor="yellow"
+                    changeRating={this.changeRating}
+                    numberOfStars={5}
+                    name={histo.artist_musicbrainz+","+2+","+i+","+histo.id}
+                    starDimension ="25px"
+                  />
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        )
+    })
 
     const gens = this.state.toptengen.map((gen,i)=>{
         return(
@@ -314,6 +355,13 @@ class UserSearch extends Component{
             }
           </div>  
         
+        </div>
+
+        <br></br>
+
+        <div className = "row">
+            <center><h5>Calificaciones históricas</h5></center>
+            {histos}
         </div>
 
       </div>
