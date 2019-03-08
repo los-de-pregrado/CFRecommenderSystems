@@ -6,6 +6,7 @@ import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
 import UserProfile from './components/userComponents/UserProfile'
 import UserSearch from './components/userComponents/UserSearch'
+import NewArtist from './components/NewArtist'
 
 
 class App extends Component{
@@ -22,7 +23,8 @@ class App extends Component{
       ratings: [],
       ranking: [],
       predictions: [],
-      cargado : false
+      cargado : false,
+      newingart : false
     }    
     this.toLogin = this.toLogin.bind(this);
     this.toSignUp = this.toSignUp.bind(this);
@@ -35,6 +37,7 @@ class App extends Component{
     this.getPredictionsLogged = this.getPredictionsLogged.bind(this);
     this.getRanking = this.getRanking.bind(this);
     this.signedUp = this.signedUp.bind(this);
+    this.artistCreated = this.artistCreated.bind(this);
   }
 
   toLogin(){
@@ -71,6 +74,24 @@ class App extends Component{
     }
 
     fetch('http://172.24.101.30:8081/model').then(res => console.log(res)).catch(error => console.log(error));
+  }
+
+  signedUp(){
+    if(this.state.iniciado == false){
+      this.setState({
+        login: false,
+        signup: false,
+        newingart : false
+      });   
+    }
+
+    fetch('http://172.24.101.30:8081/model').then(res => console.log(res)).catch(error => console.log(error));
+  }
+
+  toNewArtist(){
+    this.setState({
+      newingart: true
+    })
   }
 
   logIn(conectado){
@@ -164,6 +185,7 @@ class App extends Component{
                     <div>
                       <li><a onClick = {this.toSignUp}>Registrarse</a></li>
                       <li><a onClick = {this.toLogin}>Iniciar sesión</a></li>
+                      <li><a onClick = {this.toNewArtist}>Agregar artistas</a></li>
                     </div>
                   }                    
                   </ul>
@@ -204,7 +226,8 @@ class App extends Component{
           :
           <ul className="sidenav" id="mobile-demo">
             <li><a onClick = {this.toSignUp}>Registrarse</a></li>
-            <li><a onClick = {this.toLogin}>Iniciar sesión</a></li>
+            <li><a onClick = {this.toLogin}>Iniciar sesión</a></li>            
+            <li><a onClick = {this.toNewArtist}>Agregar artistas</a></li>
           </ul>
         }
 
@@ -218,7 +241,11 @@ class App extends Component{
           :this.state.signup?
           <div>
             <SignUp enableSignUp = {this.signedUp}/>   
-          </div>          
+          </div>
+          :this.state.newingart?
+          <div>
+            <NewArtist enableSignUp = {this.artistCreated}/>   
+          </div> 
           :this.state.iniciado?
             this.state.onSearch?
             <div>
