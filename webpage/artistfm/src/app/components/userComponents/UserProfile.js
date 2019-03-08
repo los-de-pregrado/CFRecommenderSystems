@@ -20,15 +20,15 @@ class UserProfile extends Component{
     document.dispatchEvent(new Event('component'));
     fetch('api/rating/byuser/'+this.state.idLogged).then(res=>res.json()).then(data=>{
       this.props.getRatings(data);
-    });
+    }).catch(err => this.props.getPredictions([]));;
 
     fetch('http://172.24.101.30:8081/ranking').then(res=>res.json()).then(data=>{
       this.props.getRanking(data);
-    });
+    }).catch(err => this.props.getPredictions([]));;
 
     fetch('http://172.24.101.30:8081/predict/'+this.state.idLogged).then(res=>res.json()).then(data=>{
       this.props.getPredictions(data);
-    });
+    }).catch(err => this.props.getPredictions([]));
   }
 
   render(){
