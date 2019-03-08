@@ -163,7 +163,7 @@ class UserSearch extends Component{
       });
     }
 
-    fetch('http://172.24.101.30:8081/model').then(console.log(res)).catch(error => console.log(error));
+    fetch('http://172.24.101.30:8081/model').then(res => console.log(res)).catch(error => console.log(error));
   }
 
   componentDidMount(){
