@@ -184,7 +184,7 @@ class UserSearch extends Component{
 
     const histos = this.state.artistasrateados.map((histo,i)=>{
       return(
-        <div className="col s12" key = {histo.artist_musicbrainz}>
+        <div className="col s4" key = {histo.artist_musicbrainz}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={histo.artist_image}/>
