@@ -38,6 +38,7 @@ class App extends Component{
     this.getRanking = this.getRanking.bind(this);
     this.signedUp = this.signedUp.bind(this);
     this.artistCreated = this.artistCreated.bind(this);
+    this.toNewArtist = this.toNewArtist.bind(this);
   }
 
   toLogin(){
