@@ -21,7 +21,8 @@ class App extends Component{
       onSearch: false,
       ratings: [],
       ranking: [],
-      predictions: []
+      predictions: [],
+      cargado : false
     }    
     this.toLogin = this.toLogin.bind(this);
     this.toSignUp = this.toSignUp.bind(this);
@@ -33,6 +34,7 @@ class App extends Component{
     this.getRatingsLogged= this.getRatingsLogged.bind(this);
     this.getPredictionsLogged = this.getPredictionsLogged.bind(this);
     this.getRanking = this.getRanking.bind(this);
+    this.signedUp = this.signedUp.bind(this);
   }
 
   toLogin(){
@@ -60,6 +62,19 @@ class App extends Component{
     }    
   }
 
+  signedUp(){
+    if(this.state.iniciado == false){
+      this.setState({
+        login: false,
+        signup: false
+      });   
+    }
+
+    fetch('http://172.24.101.30:8081/model').then(res=>res.json()).then(data=>{
+      console.log("Nuevo modelo corriendo");
+    });
+  }
+
   logIn(conectado){
     const idLogeado = conectado.idIdentified;
     var nombreLogeado = '';
@@ -77,7 +92,8 @@ class App extends Component{
 
   toProfile(){
     this.setState({
-      onSearch: false
+      onSearch: false,
+      cargado: false
     }); 
   }
 
@@ -91,7 +107,8 @@ class App extends Component{
       onSearch : false,
       ratings: [],
       ranking: [],
-      predictions: []
+      predictions: [],
+      cargado: false
     });
     M.toast({html:'Sesión cerrada', classes: 'rounded'});
   }
@@ -116,7 +133,8 @@ class App extends Component{
 
   getPredictionsLogged(data){
     this.setState({
-      predictions: data
+      predictions: data,
+      cargado: true
     });
   }
 
@@ -137,7 +155,11 @@ class App extends Component{
                     this.state.iniciado?
                     <div>
                       <li><a onClick = {this.toProfile}>Mi perfil</a></li>
-                      <li><a onClick = {this.toSearch}>Buscar</a></li>
+                      {
+                        this.state.cargado?                        
+                           <li><a onClick = {this.toSearch}>Buscar</a></li>                        
+                        :null
+                      }                     
                       <li><a className="modal-trigger" href="#confirmModal">Salir</a></li>                      
                     </div>
                     :
@@ -174,7 +196,11 @@ class App extends Component{
           this.state.iniciado?
           <ul className="sidenav" id="mobile-demo">      
               <li><a onClick = {this.toProfile}>Mi perfil</a></li>
-              <li><a onClick = {this.toSearch}>Buscar</a></li>
+              {
+                this.state.cargado?                
+                    <li><a onClick = {this.toSearch}>Buscar</a></li>                
+                :null
+              } 
               <li><a className="modal-trigger" href="#confirmModal">Salir</a></li>                        
           </ul>
           :
@@ -193,7 +219,7 @@ class App extends Component{
           </div>
           :this.state.signup?
           <div>
-            <SignUp enableSignUp = {this.logIn}/>   
+            <SignUp enableSignUp = {this.signedUp}/>   
           </div>          
           :this.state.iniciado?
             this.state.onSearch?
