@@ -359,10 +359,15 @@ class UserSearch extends Component{
 
         <br></br>
 
-        <div className = "row">
+        {
+          this.props.ratings.length>0?
+          <div className = "row">
             <center><h5>Calificaciones históricas</h5></center>
+            <br></br>
             {histos}
-        </div>
+          </div>
+          :null
+        }        
 
       </div>
         
