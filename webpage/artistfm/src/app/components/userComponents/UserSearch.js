@@ -184,7 +184,7 @@ class UserSearch extends Component{
 
     const histos = this.state.artistasrateados.map((histo,i)=>{
       return(
-        <div className="col s4" key = {histo.artist_musicbrainz}>
+        <div className="col s4" key = {histo.artist_musicbrainz + "h"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={histo.artist_image}/>
@@ -215,7 +215,7 @@ class UserSearch extends Component{
 
     const gens = this.state.toptengen.map((gen,i)=>{
         return(
-          <div className="col s12" key = {gen.artist_musicbrainz}>
+          <div className="col s12" key = {gen.artist_musicbrainz + "g"}>
             <div className="card horizontal">
               <div className="card-image">
                 <img src={gen.artist_image}/>
@@ -246,7 +246,7 @@ class UserSearch extends Component{
 
     const mines = this.state.toptenmine.map((mine,i)=>{
       return(
-        <div className="col s12" key = {mine.artist_musicbrainz}>
+        <div className="col s12" key = {mine.artist_musicbrainz +"m"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={mine.artist_image}/>
@@ -277,7 +277,7 @@ class UserSearch extends Component{
 
     const searches = this.state.toptensearch.map((search,i)=>{
       return(
-        <div className="col s12" key = {search.artist_musicbrainz}>
+        <div className="col s12" key = {search.artist_musicbrainz +"s"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={search.artist_image}/>
