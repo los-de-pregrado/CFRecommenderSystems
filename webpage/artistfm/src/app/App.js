@@ -70,9 +70,7 @@ class App extends Component{
       });   
     }
 
-    fetch('http://172.24.101.30:8081/model').then(res=>res.json()).then(data=>{
-      console.log("Nuevo modelo corriendo");
-    });
+    fetch('http://172.24.101.30:8081/model').then(console.log(res)).catch(error => console.log(error));
   }
 
   logIn(conectado){
