@@ -94,6 +94,8 @@ class App extends Component{
 
   toNewArtist(){
     this.setState({
+      login: false,
+      signup: false,
       newingart: true
     })
   }
