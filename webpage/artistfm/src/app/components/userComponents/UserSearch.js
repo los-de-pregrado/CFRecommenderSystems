@@ -229,7 +229,7 @@ class UserSearch extends Component{
 
     const gens = this.state.toptengen.map((gen,i)=>{
         return(
-          <div onClick={() => handleitemClick(histo)} className="col s4 modal-trigger" key = {gen.artist_musicbrainz + "g"}>
+          <div onClick={() => handleitemClick(gen)} className="col s4 modal-trigger" key = {gen.artist_musicbrainz + "g"}>
             <div className="card horizontal">
               <div className="card-image">
                 <img src={gen.artist_image}/>
@@ -260,7 +260,7 @@ class UserSearch extends Component{
 
     const mines = this.state.toptenmine.map((mine,i)=>{
       return(
-        <div onClick={() => handleitemClick(histo)} className="col s4 modal-trigger" key = {mine.artist_musicbrainz +"m"}>
+        <div onClick={() => handleitemClick(mine)} className="col s4 modal-trigger" key = {mine.artist_musicbrainz +"m"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={mine.artist_image}/>
@@ -291,7 +291,7 @@ class UserSearch extends Component{
 
     const searches = this.state.toptensearch.map((search,i)=>{
       return(
-        <div onClick={() => handleitemClick(histo)} className="col s4 modal-trigger" key = {search.artist_musicbrainz +"s"}>
+        <div onClick={() => handleitemClick(search)} className="col s4 modal-trigger" key = {search.artist_musicbrainz +"s"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={search.artist_image}/>
