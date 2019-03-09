@@ -1,0 +1,177 @@
+{
+    "tables": {
+        "Artists": {
+            "tableName": "Artists",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "artist_name": {
+                    "field": "artist_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "artist_musicbrainz": {
+                    "unique": true,
+                    "field": "artist_musicbrainz",
+                    "seqType": "Sequelize.STRING"
+                },
+                "artist_image": {
+                    "field": "artist_image",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "Ratings": {
+            "tableName": "Ratings",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "rating_value": {
+                    "field": "rating_value",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "ArtistId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Artists",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "ArtistId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "UserId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "UserId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "Songs": {
+            "tableName": "Songs",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "song_name": {
+                    "field": "song_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "song_musicbrainz": {
+                    "unique": true,
+                    "field": "song_musicbrainz",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "ArtistId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Artists",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "ArtistId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "Users": {
+            "tableName": "Users",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "user_names": {
+                    "field": "user_names",
+                    "seqType": "Sequelize.STRING"
+                },
+                "user_lastnames": {
+                    "field": "user_lastnames",
+                    "seqType": "Sequelize.STRING"
+                },
+                "user_email": {
+                    "unique": true,
+                    "field": "user_email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "user_password": {
+                    "field": "user_password",
+                    "seqType": "Sequelize.STRING"
+                },
+                "user_image": {
+                    "field": "user_image",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}
