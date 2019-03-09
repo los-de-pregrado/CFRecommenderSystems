@@ -43,7 +43,7 @@ class UserSearch extends Component{
       }
       fetch('/api/artist/'+artist_id).then(res => res.json()).then(data => {       
           toptenminelist.push(data);         
-        });              
+      });              
     }
 
     let artistaslist = []
@@ -64,7 +64,9 @@ class UserSearch extends Component{
         toptenminerates: toptenminerateslist,
         toptensearchrates: [],
         artistasrateados: artistaslist,
-        artistarrateadosrates: this.props.ratings
+        artistarrateadosrates: this.props.ratings,
+        selectedItem: null,
+        ratingsSelectedItem: [],
     }
     
     this.actualizar = this.actualizar.bind(this);
@@ -180,11 +182,23 @@ class UserSearch extends Component{
     document.dispatchEvent(new Event('component'));      
   }
 
+  handleitemClick(item){
+    this.setState({
+      selectedItem: item
+    }, () =>{
+      fetch('/api/rating/byartist/'+ item.id).then(res => res.json()).then(data => {
+        this.setState({
+          ratingsSelectedItem: data
+        });
+      }); 
+    });
+  }
+
   render(){
 
     const histos = this.state.artistasrateados.map((histo,i)=>{
       return(
-        <div className="col s4" key = {histo.artist_musicbrainz + "h"}>
+        <div onClick={() => handleitemClick(histo)} className="col s4 modal-trigger" key = {histo.artist_musicbrainz + "h"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={histo.artist_image}/>
@@ -215,7 +229,7 @@ class UserSearch extends Component{
 
     const gens = this.state.toptengen.map((gen,i)=>{
         return(
-          <div className="col s12" key = {gen.artist_musicbrainz + "g"}>
+          <div onClick={() => handleitemClick(histo)} className="col s4 modal-trigger" key = {gen.artist_musicbrainz + "g"}>
             <div className="card horizontal">
               <div className="card-image">
                 <img src={gen.artist_image}/>
@@ -246,7 +260,7 @@ class UserSearch extends Component{
 
     const mines = this.state.toptenmine.map((mine,i)=>{
       return(
-        <div className="col s12" key = {mine.artist_musicbrainz +"m"}>
+        <div onClick={() => handleitemClick(histo)} className="col s4 modal-trigger" key = {mine.artist_musicbrainz +"m"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={mine.artist_image}/>
@@ -277,7 +291,7 @@ class UserSearch extends Component{
 
     const searches = this.state.toptensearch.map((search,i)=>{
       return(
-        <div className="col s12" key = {search.artist_musicbrainz +"s"}>
+        <div onClick={() => handleitemClick(histo)} className="col s4 modal-trigger" key = {search.artist_musicbrainz +"s"}>
           <div className="card horizontal">
             <div className="card-image">
               <img src={search.artist_image}/>
@@ -309,6 +323,43 @@ class UserSearch extends Component{
     return(
         
       <div>
+
+        <div id="confirmModal" className="modal">
+          <div className="modal-content">
+            <div className="row">
+              <div className="col s4">
+                <h4>{this.state.selectedItem.artist_name}</h4>
+                <img src={this.state.selectedItem.artist_image}/>
+                <p>Musicbrainz: {this.state.selectedItem.artist_musicbrainz}</p>
+              </div>
+              <div className="col s8">
+                {this.state.ratingsSelectedItem.map((thisRating, i) =>{
+                  return(
+                    <div className="card-panel teal">
+                      <span className="white-text">
+                        Rating From User {thisRating.user_id}
+                      </span>
+                      <br/>
+                      <center>
+                        <StarRatings
+                          rating={thisRating.rating_value || 0}
+                          starRatedColor="yellow"
+                          changeRating={()=> {}}
+                          numberOfStars={5}
+                          name={thisRating.user_id+","+2+","+i+","+thisRating.id}
+                          starDimension ="15px"
+                        />
+                      </center>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="modal-footer">
+            <a className="modal-close waves-effect waves-green btn-flat">Salir</a>
+          </div>
+        </div>
         
         <div className="container">
           <nav>
