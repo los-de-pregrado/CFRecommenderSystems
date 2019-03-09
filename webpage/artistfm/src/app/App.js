@@ -45,7 +45,8 @@ class App extends Component{
     this.setState({
       login: true,
       signup: false,
-      iniciado: false      
+      iniciado: false,
+      newingart : false  
     });
   }
 
@@ -53,7 +54,8 @@ class App extends Component{
     this.setState({
       login: false,
       signup: true,
-      iniciado: false
+      iniciado: false,
+      newingart: false
     });
   }
 
@@ -61,7 +63,8 @@ class App extends Component{
     if(this.state.iniciado == false){
       this.setState({
         login: false,
-        signup: false
+        signup: false,
+        newingart :false
       });   
     }    
   }
@@ -105,7 +108,8 @@ class App extends Component{
           signup: false,
           iniciado: true,
           idIniciado: idLogeado,
-          nombreIniciado: nombreLogeado
+          nombreIniciado: nombreLogeado,
+          newingart : false
         });        
       });   
   }
