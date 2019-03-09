@@ -324,42 +324,44 @@ class UserSearch extends Component{
         
       <div>
 
-        <div id="confirmModal" className="modal">
-          <div className="modal-content">
-            <div className="row">
-              <div className="col s4">
-                <h4>{this.state.selectedItem.artist_name}</h4>
-                <img src={this.state.selectedItem.artist_image}/>
-                <p>Musicbrainz: {this.state.selectedItem.artist_musicbrainz}</p>
-              </div>
-              <div className="col s8">
-                {this.state.ratingsSelectedItem.map((thisRating, i) =>{
-                  return(
-                    <div className="card-panel teal">
-                      <span className="white-text">
-                        Rating From User {thisRating.user_id}
-                      </span>
-                      <br/>
-                      <center>
-                        <StarRatings
-                          rating={thisRating.rating_value || 0}
-                          starRatedColor="yellow"
-                          changeRating={()=> {}}
-                          numberOfStars={5}
-                          name={thisRating.user_id+","+2+","+i+","+thisRating.id}
-                          starDimension ="15px"
-                        />
-                      </center>
-                    </div>
-                  );
-                })}
+        {!this.state.selectedItem ? null :
+          <div id="confirmModal" className="modal">
+            <div className="modal-content">
+              <div className="row">
+                <div className="col s4">
+                  <h4>{this.state.selectedItem.artist_name}</h4>
+                  <img src={this.state.selectedItem.artist_image}/>
+                  <p>Musicbrainz: {this.state.selectedItem.artist_musicbrainz}</p>
+                </div>
+                <div className="col s8">
+                  {this.state.ratingsSelectedItem.map((thisRating, i) =>{
+                    return(
+                      <div className="card-panel teal">
+                        <span className="white-text">
+                          Rating From User {thisRating.user_id}
+                        </span>
+                        <br/>
+                        <center>
+                          <StarRatings
+                            rating={thisRating.rating_value || 0}
+                            starRatedColor="yellow"
+                            changeRating={()=> {}}
+                            numberOfStars={5}
+                            name={thisRating.user_id+","+2+","+i+","+thisRating.id}
+                            starDimension ="15px"
+                          />
+                        </center>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
+            <div className="modal-footer">
+              <a className="modal-close waves-effect waves-green btn-flat">Salir</a>
+            </div>
           </div>
-          <div className="modal-footer">
-            <a className="modal-close waves-effect waves-green btn-flat">Salir</a>
-          </div>
-        </div>
+        }
         
         <div className="container">
           <nav>
