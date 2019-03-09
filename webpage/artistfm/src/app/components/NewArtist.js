@@ -24,8 +24,6 @@ class NewArtist extends Component{
   handleSubmit(e){
     e.preventDefault();
     var identified = false;    
-      
-    i
   
     if(this.state.artist_image == '' || this.state.artist_musicbrainz == '' || this.state.artist_name == ''){
       M.toast({html:'Ingresa valores válidos para un nuevo artista', classes: 'rounded'});
